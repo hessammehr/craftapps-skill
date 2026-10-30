@@ -1,0 +1,1 @@
+Now make a v2 on a second artboard and leave v1 untouched: add a competitive-inhibitor curve to panel b (apparent K_M three times larger, same V_max) in a contrasting colour with a small legend, and put the rate equation above the plot. Export both artboards as one PDF and as separate SVGs.

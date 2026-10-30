@@ -1,0 +1,656 @@
+# VectorCraft menus
+
+Generated 2026-10-30 from the running app by scripts/build_reference.py; regenerate after updates.
+
+Format: `Menu > Submenu > Item` · shortcut · `command` [params the item passes]. Shortcuts are macOS (Cmd = ⌘, Alt = ⌥ Option); on Windows/Linux Cmd is Ctrl.
+
+
+## VectorCraft
+
+- About VectorCraft · `help.about`
+- Join Our Discord · `help.discord`
+
+## File
+
+- New… · **Cmd+N** · `file.newDialog`
+- New from Template… · **Cmd+Shift+N** · `file.newFromTemplate`
+- Open… · **Cmd+O** · `file.open`
+- Open Recent Files > … · the recently opened files (`file.openRecent1`…)
+- Show in Folder · `file.reveal`
+- Close · **Cmd+W** · `file.close`
+- Close All · **Cmd+Alt+W** · `file.closeAll`
+- Save · **Cmd+S** · `file.save`
+- Save As… · **Cmd+Shift+S** · `file.saveAs`
+- Save a Copy… · **Cmd+Alt+S** · `file.saveCopy`
+- Save as Template… · `file.saveAsTemplate`
+- Save as PDF… · `file.export.pdf`
+- Save for Office Documents… · `document.exportForOffice`
+- Revert · **F12** · `file.revert`
+- Place… · **Cmd+Shift+P** · `file.place`
+- Export > Export for Screens… · **Cmd+Alt+E** · `file.exportForScreens`
+- Export > Export As… · `file.exportAs`
+- Export > Export As SVG… · `file.export.svg`
+- Export > Export As PNG… · `file.export.png`
+- Export > Save for Web (Legacy)… · **Cmd+Alt+Shift+S** · `file.saveForWeb`
+- Export Selection… · `file.exportSelection`
+- Package… · **Cmd+Alt+Shift+P** · `ui.packageDialog`
+- Scripts > Check Script… · `ui.checkScript`
+- Scripts > Other Script… · **Cmd+F12** · `None`
+- Document Setup… · **Cmd+Alt+P** · `file.documentSetup`
+- Document Color Mode > CMYK Color · `file.documentColorMode` {"mode": "cmyk"}
+- Document Color Mode > RGB Color · `file.documentColorMode` {"mode": "rgb"}
+- File Info… · **Cmd+Alt+Shift+I** · `file.info`
+- Print… · **Cmd+P** · `file.print`
+- Exit · **Cmd+Q** · `app.quit`
+
+## Edit
+
+- Undo · **Cmd+Z** · `edit.undo`
+- Redo · **Cmd+Shift+Z** · `edit.redo`
+- Cut · **Cmd+X** · `edit.cut`
+- Copy · **Cmd+C** · `edit.copy`
+- Paste · **Cmd+V** · `edit.paste`
+- Paste in Front · **Cmd+F** · `edit.pasteInFront`
+- Paste in Back · **Cmd+B** · `edit.pasteInBack`
+- Paste in Place · **Cmd+Shift+V** · `edit.pasteInPlace`
+- Paste on All Artboards · **Cmd+Alt+Shift+V** · `edit.pasteOnAllArtboards`
+- Paste without Formatting · **Cmd+Alt+V** · `edit.pasteWithoutFormatting`
+- Clear · **Delete** · `edit.clear`
+- Find and Replace… · `edit.findReplace` {"find": "", "matchCase": false, "replace": "", "wholeWord": false}
+- Find Next · `edit.findNext` {"find": ""}
+- Spelling > Auto Spell Check · `None`
+- Spelling > Check Spelling… · **Cmd+I** · `None`
+- Spelling > Edit Custom Dictionary… · `None`
+- Edit Colors > Recolor Artwork… · `ui.recolorDialog`
+- Edit Colors > Recolor with Preset > 1 Color Job… · `ui.recolorDialog` {"colors": 1}
+- Edit Colors > Recolor with Preset > 2 Color Job… · `ui.recolorDialog` {"colors": 2}
+- Edit Colors > Recolor with Preset > 3 Color Job… · `ui.recolorDialog` {"colors": 3}
+- Edit Colors > Recolor with Preset > Color Library… · `ui.recolorDialog` {"library": ""}
+- Edit Colors > Adjust Color Balance… · `ui.colorBalanceDialog`
+- Edit Colors > Blend Front to Back · `edit.colors.blendFrontToBack`
+- Edit Colors > Blend Horizontally · `edit.colors.blendHorizontally`
+- Edit Colors > Blend Vertically · `edit.colors.blendVertically`
+- Edit Colors > Convert to CMYK · `edit.colors.toCMYK`
+- Edit Colors > Convert to Grayscale · `edit.colors.toGrayscale`
+- Edit Colors > Convert to RGB · `edit.colors.toRGB`
+- Edit Colors > Invert Colors · `edit.colors.invert`
+- Edit Colors > Overprint Black… · `edit.colors.overprintBlack` {"fill": true, "includeCmyBlacks": false, "includeSpotBlacks": false, "percentage": 100, "remove": false, "stroke": true}
+- Edit Colors > Saturate… · `ui.saturateDialog`
+- Edit Original · `links.editOriginal`
+- Transparency Flattener Presets… · `ui.flattenerPresetsDialog`
+- Print Presets… · `ui.printPresetsDialog`
+- PDF Presets… · `ui.pdfPresetsDialog`
+- Perspective Grid Presets… · `ui.perspectivePresetsDialog`
+- Color Settings… · **Cmd+Shift+K** · `edit.colorSettings`
+- Assign Profile… · `edit.assignProfile`
+- Keyboard Shortcuts… · **Cmd+Alt+Shift+K** · `edit.keyboardShortcuts`
+- Preferences… · **Cmd+K** · `edit.preferences`
+
+## Object
+
+- Transform > Transform Again · **Cmd+D** · `object.transformAgain`
+- Transform > Move… · **Cmd+Shift+M** · `object.move`
+- Transform > Rotate… · `object.rotate`
+- Transform > Reflect… · `object.reflect`
+- Transform > Scale… · `object.scale`
+- Transform > Shear… · `object.shear`
+- Transform > Transform Each… · **Cmd+Alt+Shift+D** · `object.transformEach`
+- Transform > Reset Bounding Box · `object.resetBoundingBox`
+- Arrange > Bring to Front · **Cmd+Shift+]** · `object.arrange.bringToFront`
+- Arrange > Bring Forward · **Cmd+]** · `object.arrange.bringForward`
+- Arrange > Send Backward · **Cmd+[** · `object.arrange.sendBackward`
+- Arrange > Send to Back · **Cmd+Shift+[** · `object.arrange.sendToBack`
+- Arrange > Send to Current Layer · `object.arrange.sendToCurrentLayer`
+- Align > Horizontal Align Left · `object.align` {"horizontal": "left"}
+- Align > Horizontal Align Center · `object.align` {"horizontal": "center"}
+- Align > Horizontal Align Right · `object.align` {"horizontal": "right"}
+- Align > Horizontal & Vertical Align Center · `object.align` {"horizontal": "center", "vertical": "center"}
+- Align > Vertical Align Top · `object.align` {"vertical": "top"}
+- Align > Vertical Align Center · `object.align` {"vertical": "center"}
+- Align > Vertical Align Bottom · `object.align` {"vertical": "bottom"}
+- Group · **Cmd+G** · `object.group`
+- Ungroup · **Cmd+Shift+G** · `object.ungroup`
+- Lock > Selection · **Cmd+2** · `object.lock`
+- Lock > All Artwork Above · `object.lock.above`
+- Lock > Other Layers · `object.lock.otherLayers`
+- Unlock All · **Cmd+Alt+2** · `object.unlockAll`
+- Hide > Selection · **Cmd+3** · `object.hide`
+- Hide > All Artwork Above · `object.hide.above`
+- Hide > Other Layers · `object.hide.otherLayers`
+- Show All · **Cmd+Alt+3** · `object.showAll`
+- Expand… · `ui.expandDialog`
+- Expand Appearance · `effect.expandAppearance`
+- Crop Image · `ui.cropImage`
+- Rasterize… · `object.rasterize`
+- Create Gradient Mesh… · `object.mesh.create` {"appearance": "flat", "cols": 4, "highlight": 100, "rows": 4}
+- Create Object Mosaic… · `object.createObjectMosaic` {"columns": 10, "deleteRaster": false, "gray": false, "rows": 10, "spacingX": 0, "spacingY": 0}
+- Vector Halftone… · `object.vectorHalftone`
+- Create Trim Marks · `object.createTrimMarks`
+- Flatten Transparency… · `ui.flattenTransparencyDialog`
+- Make Pixel Perfect · `object.makePixelPerfect`
+- Slice > Make · `object.slice.make`
+- Slice > Release · `object.slice.release`
+- Slice > Create from Guides · `object.slice.fromGuides`
+- Slice > Create from Selection · `object.slice.fromSelection`
+- Slice > Duplicate Slice · `object.slice.duplicate`
+- Slice > Combine Slices · `object.slice.combine`
+- Slice > Divide Slices… · `object.slice.divide`
+- Slice > Delete All · `object.slice.deleteAll`
+- Slice > Slice Options… · `object.slice.options`
+- Slice > Clip to Artboard · `object.slice.clipToArtboard`
+- Path > Join · **Cmd+J** · `path.join`
+- Path > Average… · **Cmd+Alt+J** · `path.average`
+- Path > Outline Stroke · `object.path.outlineStroke`
+- Path > Offset Path… · `object.path.offsetPath`
+- Path > Reverse Path Direction · `path.reverse`
+- Path > Simplify… · `object.path.simplify`
+- Path > Add Anchor Points · `object.path.addAnchorPoints`
+- Path > Remove Anchor Points · `path.removeAnchors`
+- Path > Divide Objects Below · `object.path.divideObjectsBelow`
+- Path > Split Into Grid… · `object.path.splitIntoGrid`
+- Path > Clean Up… · `object.path.cleanUp` {"emptyTextPaths": true, "strayPoints": true, "unpaintedObjects": true}
+- Shape > Convert to Shape · `object.shape.convertToShape`
+- Shape > Expand Shape · `object.expandShape`
+- Pattern > Make · `object.pattern.make`
+- Pattern > Edit Pattern · **Cmd+Shift+F8** · `object.pattern.edit`
+- Pattern > Tile Edge Color… · `ui.tileEdgeColor`
+- Repeat > Radial · `object.repeat.radial`
+- Repeat > Grid · `object.repeat.grid`
+- Repeat > Mirror · `object.repeat.mirror`
+- Repeat > Release · `object.repeat.release`
+- Repeat > Options… · `object.repeat.options`
+- Intertwine > Make · `object.intertwine.make`
+- Intertwine > Edit · `object.intertwine.edit`
+- Intertwine > Release · `object.intertwine.release`
+- Objects on Path > Attach · `object.objectsOnPath.attach`
+- Objects on Path > Expand · `object.objectsOnPath.expand`
+- Blend > Make · **Cmd+Alt+B** · `object.blend.make`
+- Blend > Release · **Cmd+Alt+Shift+B** · `object.blend.release`
+- Blend > Blend Options… · `object.blend.options`
+- Blend > Expand · `object.blend.expand`
+- Blend > Replace Spine · `object.blend.replaceSpine`
+- Blend > Reverse Spine · `object.blend.reverseSpine`
+- Blend > Reverse Front to Back · `object.blend.reverseFrontToBack`
+- Envelope Distort > Make with Warp… · **Cmd+Alt+Shift+W** · `object.envelope.makeWithWarp`
+- Envelope Distort > Make with Mesh… · **Cmd+Alt+M** · `object.envelope.makeWithMesh`
+- Envelope Distort > Make with Top Object · **Cmd+Alt+C** · `object.envelope.makeWithTopObject`
+- Envelope Distort > Release · `object.envelope.release`
+- Envelope Distort > Envelope Options… · `object.envelope.options`
+- Envelope Distort > Expand · `object.envelope.expand`
+- Envelope Distort > Edit Contents · `object.envelope.editContents`
+- Perspective > Attach to Active Plane · `perspective.attach`
+- Perspective > Release with Perspective · `perspective.release`
+- Perspective > Move Plane to Match Object · `perspective.plane.matchObject`
+- Perspective > Edit Text · `perspective.editText`
+- Live Paint > Make · **Cmd+Alt+X** · `livePaint.make`
+- Live Paint > Merge · `livePaint.merge`
+- Live Paint > Release · `livePaint.release`
+- Live Paint > Gap Options… · `ui.livePaintGapOptions`
+- Live Paint > Expand · `livePaint.expand`
+- Image Trace > Make · `imageTrace.make` {"preset": "Default"}
+- Image Trace > Make and Expand · `imageTrace.makeAndExpand` {"preset": "Default"}
+- Image Trace > Release · `imageTrace.release`
+- Image Trace > Expand · `imageTrace.expand`
+- Text Wrap > Make · `object.textWrap.make`
+- Text Wrap > Release · `object.textWrap.release`
+- Text Wrap > Text Wrap Options… · `object.textWrap.options`
+- Clipping Mask > Make · **Cmd+7** · `object.clippingMask.make`
+- Clipping Mask > Release · **Cmd+Alt+7** · `object.clippingMask.release`
+- Clipping Mask > Edit Contents · `object.clippingMask.editContents`
+- Clipping Mask > Edit Clipping Path · `object.clippingMask.editMask`
+- Compound Path > Make · **Cmd+8** · `object.compoundPath.make`
+- Compound Path > Release · **Cmd+Alt+Shift+8** · `object.compoundPath.release`
+- Artboards > Convert to Artboards · `artboard.convertToArtboards`
+- Artboards > Rearrange All Artboards… · `artboard.rearrange`
+- Artboards > Fit to Artwork Bounds · `artboard.fitToArt`
+- Artboards > Fit to Selected Art · `artboard.fitToSelection`
+- Graph > Type… · `graph.setType`
+- Graph > Data… · `graph.setData`
+- Graph > Design… · `graph.design`
+- Graph > Column… · `graph.column`
+- Graph > Marker… · `graph.marker`
+- Collect for Export > As Single Asset · `assets.add` {"multiple": false}
+- Collect for Export > As Multiple Assets · `assets.add` {"multiple": true}
+- Plug-ins > Install Plug-in… · `ui.installPlugin`
+- Plug-ins > Reload Plug-ins · `plugin.reload`
+- Font > … · one item per installed font family (`text.setStyle {font}`)
+- Recent Fonts > … · recently used fonts (`type.recentFont1`…)
+
+## Type
+
+- Size > 6 pt · `text.setStyle` {"size": 6}
+- Size > 8 pt · `text.setStyle` {"size": 8}
+- Size > 9 pt · `text.setStyle` {"size": 9}
+- Size > 10 pt · `text.setStyle` {"size": 10}
+- Size > 11 pt · `text.setStyle` {"size": 11}
+- Size > 12 pt · `text.setStyle` {"size": 12}
+- Size > 14 pt · `text.setStyle` {"size": 14}
+- Size > 18 pt · `text.setStyle` {"size": 18}
+- Size > 24 pt · `text.setStyle` {"size": 24}
+- Size > 30 pt · `text.setStyle` {"size": 30}
+- Size > 36 pt · `text.setStyle` {"size": 36}
+- Size > 48 pt · `text.setStyle` {"size": 48}
+- Size > 60 pt · `text.setStyle` {"size": 60}
+- Size > 72 pt · `text.setStyle` {"size": 72}
+- Bold · `type.bold`
+- Italic · `type.italic`
+- Glyphs · `window.panel` {"panel": "glyphs", "toggle": true}
+- Insert Special Character > Bullet · `type.insert` {"char": "bullet"}
+- Insert Special Character > Copyright Symbol · `type.insert` {"char": "copyright"}
+- Insert Special Character > Ellipsis · `type.insert` {"char": "ellipsis"}
+- Insert Special Character > Paragraph Symbol · `type.insert` {"char": "paragraph"}
+- Insert Special Character > Registered Trademark Symbol · `type.insert` {"char": "registered"}
+- Insert Special Character > Section Symbol · `type.insert` {"char": "section"}
+- Insert Special Character > Trademark Symbol · `type.insert` {"char": "trademark"}
+- Insert Special Character > Em Dash · `type.insert` {"char": "emDash"}
+- Insert Special Character > En Dash · `type.insert` {"char": "enDash"}
+- Insert Special Character > Discretionary Hyphen · `type.insert` {"char": "discretionaryHyphen"}
+- Insert Special Character > Nonbreaking Hyphen · `type.insert` {"char": "nonBreakingHyphen"}
+- Insert Special Character > Double Left Quotation Marks · `type.insert` {"char": "doubleLeftQuote"}
+- Insert Special Character > Double Right Quotation Marks · `type.insert` {"char": "doubleRightQuote"}
+- Insert Special Character > Single Left Quotation Mark · `type.insert` {"char": "singleLeftQuote"}
+- Insert Special Character > Single Right Quotation Mark · `type.insert` {"char": "singleRightQuote"}
+- Insert Whitespace Character > Em Space · `type.insert` {"char": "emSpace"}
+- Insert Whitespace Character > En Space · `type.insert` {"char": "enSpace"}
+- Insert Whitespace Character > Hair Space · `type.insert` {"char": "hairSpace"}
+- Insert Whitespace Character > Sixth Space · `type.insert` {"char": "sixthSpace"}
+- Insert Whitespace Character > Thin Space · `type.insert` {"char": "thinSpace"}
+- Insert Whitespace Character > Nonbreaking Space · `type.insert` {"char": "nonBreakingSpace"}
+- Insert Whitespace Character > Figure Space · `type.insert` {"char": "figureSpace"}
+- Insert Whitespace Character > Punctuation Space · `type.insert` {"char": "punctuationSpace"}
+- Insert Whitespace Character > Third Space · `type.insert` {"char": "thirdSpace"}
+- Insert Whitespace Character > Quarter Space · `type.insert` {"char": "quarterSpace"}
+- Insert Break Character > Forced Line Break · `type.insert` {"char": "forcedLineBreak"}
+- Insert Break Character > Tab · `type.insert` {"char": "tab"}
+- Convert To Area Type · `type.convertToAreaType`
+- Convert To Point Type · `type.convertToPointType`
+- Area Type Options… · `text.areaOptions`
+- Type on a Path > Rainbow · `type.pathOptions` {"effect": "rainbow"}
+- Type on a Path > Skew · `type.pathOptions` {"effect": "skew"}
+- Type on a Path > 3D Ribbon · `type.pathOptions` {"effect": "3dRibbon"}
+- Type on a Path > Stair Step · `type.pathOptions` {"effect": "stairStep"}
+- Type on a Path > Gravity · `type.pathOptions` {"effect": "gravity"}
+- Type on a Path > Type on a Path Options… · `type.pathOptions`
+- Threaded Text > Create · `text.thread.create`
+- Threaded Text > Release Selection · `text.thread.releaseSelection`
+- Threaded Text > Remove Threading · `text.thread.remove`
+- Fit Headline · `text.fitHeadline`
+- Find Font… · `type.findFont`
+- Change Case > UPPERCASE · `type.changeCase` {"case": "upper"}
+- Change Case > lowercase · `type.changeCase` {"case": "lower"}
+- Change Case > Title Case · `type.changeCase` {"case": "title"}
+- Change Case > Sentence case · `type.changeCase` {"case": "sentence"}
+- Smart Punctuation… · `type.smartPunctuation` {"dashes": true, "ellipsis": true, "quotes": true, "scope": "selection"}
+- Bullets and Numbering > Apply Bullets · `type.applyBullets`
+- Bullets and Numbering > Apply Numbers · `type.applyNumbers`
+- Bullets and Numbering > Convert to Text · `type.convertListToText`
+- Create Outlines · **Cmd+Shift+O** · `type.createOutlines`
+- Scale Text Attributes · `type.scaleTextAttributes`
+- Optical Margin Alignment · `type.opticalMarginAlignment`
+- Fill with Placeholder Text · `type.fillPlaceholder`
+- Insert Inline Symbol · `text.insertInline`
+- Show Hidden Characters · **Cmd+Alt+I** · `type.hiddenCharacters`
+- Type Orientation > Horizontal · `type.orientation.horizontal`
+- Type Orientation > Vertical · `type.orientation.vertical`
+
+## Select
+
+- All · **Cmd+A** · `select.all`
+- All on Active Artboard · **Cmd+Alt+A** · `select.allOnArtboard`
+- Deselect · **Cmd+Shift+A** · `select.none`
+- Reselect · **Cmd+6** · `select.reselect`
+- Inverse · `select.inverse`
+- Next Object Above · **Cmd+Alt+]** · `select.nextAbove`
+- Next Object Below · **Cmd+Alt+[** · `select.nextBelow`
+- Same > Appearance · `select.same.appearance`
+- Same > Appearance Attribute · `select.same.appearanceAttribute`
+- Same > Blending Mode · `select.same.blendingMode`
+- Same > Fill & Stroke · `select.same.fillAndStroke`
+- Same > Fill Color · `select.same.fillColor`
+- Same > Opacity · `select.same.opacity`
+- Same > Stroke Color · `select.same.strokeColor`
+- Same > Stroke Weight · `select.same.strokeWeight`
+- Same > Graphic Style · `select.same.graphicStyle`
+- Same > Shape · `select.same.shapeType`
+- Same > Symbol Instance · `select.same.symbolInstance`
+- Same > Font Family · `select.same.fontFamily`
+- Same > Font Family & Style · `select.same.fontFamilyStyle`
+- Same > Font Family, Style & Size · `select.same.fontFamilyStyleSize`
+- Same > Font Size · `select.same.fontSize`
+- Same > Text Fill Color · `select.same.textFillColor`
+- Same > Text Stroke Color · `select.same.textStrokeColor`
+- Object > All on Same Layers · `select.object.allOnSameLayers`
+- Object > Direction Handles · `select.object.directionHandles`
+- Object > Brush Strokes · `select.object.brushStrokes`
+- Object > Bristle Brush Strokes · `select.object.bristleBrushStrokes`
+- Object > Clipping Masks · `select.object.clippingMasks`
+- Object > Slices · `select.object.slices`
+- Object > Stray Points · `select.object.strayPoints`
+- Object > Open Paths · `select.object.openPaths`
+- Object > All Text Objects · `select.object.textObjects`
+- Object > Point Text Objects · `select.object.pointText`
+- Object > Area Text Objects · `select.object.areaText`
+- Start Global Edit · `select.globalEdit`
+- Save Selection… · `select.save`
+- Update Selection · `select.update`
+- Edit Selection… · `select.editSaved`
+
+## Effect
+
+- Apply Last Effect · **Cmd+Shift+E** · `effect.applyLast`
+- Last Effect… · **Cmd+Alt+Shift+E** · `effect.last`
+- Document Raster Effects Settings… · `document.rasterEffectsSettings`
+- 3D and Materials > Extrude & Bevel… · `effect.dialog` {"effect": "threeD.extrude"}
+- 3D and Materials > Revolve… · `effect.dialog` {"effect": "threeD.revolve"}
+- 3D and Materials > Inflate… · `effect.dialog` {"effect": "threeD.inflate"}
+- 3D and Materials > Rotate… · `effect.dialog` {"effect": "threeD.rotate"}
+- 3D and Materials > Materials… · `None`
+- Color Adjustments > Brightness/Contrast… · `effect.dialog` {"effect": "adjust.brightnessContrast"}
+- Color Adjustments > Curves… · `effect.dialog` {"effect": "adjust.curves"}
+- Color Adjustments > Hue/Saturation… · `effect.dialog` {"effect": "adjust.hueSaturation"}
+- Color Adjustments > Levels… · `effect.dialog` {"effect": "adjust.levels"}
+- Color Adjustments > Shift to Color… · `effect.dialog` {"effect": "adjust.shiftToColor"}
+- Color Adjustments > Temperature/Tint… · `effect.dialog` {"effect": "adjust.temperatureTint"}
+- Convert to Shape > Rectangle… · `effect.dialog` {"effect": "convertToShape.rectangle"}
+- Convert to Shape > Rounded Rectangle… · `effect.dialog` {"effect": "convertToShape.roundedRectangle"}
+- Convert to Shape > Ellipse… · `effect.dialog` {"effect": "convertToShape.ellipse"}
+- Crop Marks · `effect.apply` {"effect": "cropMarks"}
+- Distort & Transform > Free Distort… · `effect.dialog` {"effect": "distort.freeDistort"}
+- Distort & Transform > Pucker & Bloat… · `effect.dialog` {"effect": "distort.puckerBloat"}
+- Distort & Transform > Roughen… · `effect.dialog` {"effect": "distort.roughen"}
+- Distort & Transform > Transform… · `effect.dialog` {"effect": "distort.transform"}
+- Distort & Transform > Tweak… · `effect.dialog` {"effect": "distort.tweak"}
+- Distort & Transform > Twist… · `effect.dialog` {"effect": "distort.twist"}
+- Distort & Transform > Zig Zag… · `effect.dialog` {"effect": "distort.zigZag"}
+- Path > Offset Path… · `effect.dialog` {"effect": "path.offsetPath"}
+- Path > Outline Object · `effect.apply` {"effect": "path.outlineObject"}
+- Path > Outline Stroke · `effect.apply` {"effect": "path.outlineStroke"}
+- Pathfinder > Add · `effect.apply` {"effect": "pathfinder.add"}
+- Pathfinder > Intersect · `effect.apply` {"effect": "pathfinder.intersect"}
+- Pathfinder > Exclude · `effect.apply` {"effect": "pathfinder.exclude"}
+- Pathfinder > Subtract · `effect.apply` {"effect": "pathfinder.subtract"}
+- Pathfinder > Minus Back · `effect.apply` {"effect": "pathfinder.minusBack"}
+- Pathfinder > Divide · `effect.apply` {"effect": "pathfinder.divide"}
+- Pathfinder > Trim · `effect.apply` {"effect": "pathfinder.trim"}
+- Pathfinder > Merge · `effect.apply` {"effect": "pathfinder.merge"}
+- Pathfinder > Crop · `effect.apply` {"effect": "pathfinder.crop"}
+- Pathfinder > Outline · `effect.apply` {"effect": "pathfinder.outline"}
+- Pathfinder > Hard Mix · `effect.apply` {"effect": "pathfinder.hardMix"}
+- Pathfinder > Soft Mix · `effect.dialog` {"effect": "pathfinder.softMix"}
+- Pathfinder > Trap… · `effect.dialog` {"effect": "pathfinder.trap"}
+- Rasterize… · `effect.dialog` {"effect": "rasterize"}
+- Stylize > Round Corners… · `effect.dialog` {"effect": "stylize.roundCorners"}
+- Stylize > Scribble… · `effect.dialog` {"effect": "stylize.scribble"}
+- Stylize > Drop Shadow… · `effect.dialog` {"effect": "stylize.dropShadow"}
+- Stylize > Inner Glow… · `effect.dialog` {"effect": "stylize.innerGlow"}
+- Stylize > Outer Glow… · `effect.dialog` {"effect": "stylize.outerGlow"}
+- Stylize > Feather… · `effect.dialog` {"effect": "stylize.feather"}
+- SVG Filters > Apply SVG Filter… · `None`
+- Warp > Arc… · `effect.dialog` {"effect": "warp.arc"}
+- Warp > Arc Lower… · `effect.dialog` {"effect": "warp.arcLower"}
+- Warp > Arc Upper… · `effect.dialog` {"effect": "warp.arcUpper"}
+- Warp > Arch… · `effect.dialog` {"effect": "warp.arch"}
+- Warp > Bulge… · `effect.dialog` {"effect": "warp.bulge"}
+- Warp > Shell Lower… · `effect.dialog` {"effect": "warp.shellLower"}
+- Warp > Shell Upper… · `effect.dialog` {"effect": "warp.shellUpper"}
+- Warp > Flag… · `effect.dialog` {"effect": "warp.flag"}
+- Warp > Wave… · `effect.dialog` {"effect": "warp.wave"}
+- Warp > Fish… · `effect.dialog` {"effect": "warp.fish"}
+- Warp > Rise… · `effect.dialog` {"effect": "warp.rise"}
+- Warp > Fisheye… · `effect.dialog` {"effect": "warp.fisheye"}
+- Warp > Inflate… · `effect.dialog` {"effect": "warp.inflate"}
+- Warp > Squeeze… · `effect.dialog` {"effect": "warp.squeeze"}
+- Warp > Twist… · `effect.dialog` {"effect": "warp.twist"}
+- Effect Gallery… · `ui.effectGalleryDialog`
+- Artistic > Colored Pencil… · `effect.dialog` {"effect": "artistic.coloredPencil"}
+- Artistic > Cutout… · `effect.dialog` {"effect": "artistic.cutout"}
+- Artistic > Dry Brush… · `effect.dialog` {"effect": "artistic.dryBrush"}
+- Artistic > Film Grain… · `effect.dialog` {"effect": "artistic.filmGrain"}
+- Artistic > Fresco… · `effect.dialog` {"effect": "artistic.fresco"}
+- Artistic > Neon Glow… · `effect.dialog` {"effect": "artistic.neonGlow"}
+- Artistic > Paint Daubs… · `effect.dialog` {"effect": "artistic.paintDaubs"}
+- Artistic > Palette Knife… · `effect.dialog` {"effect": "artistic.paletteKnife"}
+- Artistic > Plastic Wrap… · `effect.dialog` {"effect": "artistic.plasticWrap"}
+- Artistic > Poster Edges… · `effect.dialog` {"effect": "artistic.posterEdges"}
+- Artistic > Rough Pastels… · `effect.dialog` {"effect": "artistic.roughPastels"}
+- Artistic > Smudge Stick… · `effect.dialog` {"effect": "artistic.smudgeStick"}
+- Artistic > Sponge… · `effect.dialog` {"effect": "artistic.sponge"}
+- Artistic > Underpainting… · `effect.dialog` {"effect": "artistic.underpainting"}
+- Artistic > Watercolor… · `effect.dialog` {"effect": "artistic.watercolor"}
+- Blur > Gaussian Blur… · `effect.dialog` {"effect": "blur.gaussian"}
+- Blur > Radial Blur… · `effect.dialog` {"effect": "blur.radial"}
+- Blur > Smart Blur… · `effect.dialog` {"effect": "blur.smart"}
+- Brush Strokes > Accented Edges… · `effect.dialog` {"effect": "brushStrokes.accentedEdges"}
+- Brush Strokes > Angled Strokes… · `effect.dialog` {"effect": "brushStrokes.angledStrokes"}
+- Brush Strokes > Crosshatch… · `effect.dialog` {"effect": "brushStrokes.crosshatch"}
+- Brush Strokes > Dark Strokes… · `effect.dialog` {"effect": "brushStrokes.darkStrokes"}
+- Brush Strokes > Ink Outlines… · `effect.dialog` {"effect": "brushStrokes.inkOutlines"}
+- Brush Strokes > Spatter… · `effect.dialog` {"effect": "brushStrokes.spatter"}
+- Brush Strokes > Sprayed Strokes… · `effect.dialog` {"effect": "brushStrokes.sprayedStrokes"}
+- Brush Strokes > Sumi-e… · `effect.dialog` {"effect": "brushStrokes.sumiE"}
+- Distort > Diffuse Glow… · `effect.dialog` {"effect": "distort.diffuseGlow"}
+- Distort > Glass… · `effect.dialog` {"effect": "distort.glass"}
+- Distort > Ocean Ripple… · `effect.dialog` {"effect": "distort.oceanRipple"}
+- Pixelate > Color Halftone… · `effect.dialog` {"effect": "pixelate.colorHalftone"}
+- Pixelate > Crystallize… · `effect.dialog` {"effect": "pixelate.crystallize"}
+- Pixelate > Mezzotint… · `effect.dialog` {"effect": "pixelate.mezzotint"}
+- Pixelate > Pointillize… · `effect.dialog` {"effect": "pixelate.pointillize"}
+- Sharpen > Unsharp Mask… · `effect.dialog` {"effect": "sharpen.unsharpMask"}
+- Sketch > Bas Relief… · `effect.dialog` {"effect": "sketch.basRelief"}
+- Sketch > Chalk & Charcoal… · `effect.dialog` {"effect": "sketch.chalkCharcoal"}
+- Sketch > Charcoal… · `effect.dialog` {"effect": "sketch.charcoal"}
+- Sketch > Chrome… · `effect.dialog` {"effect": "sketch.chrome"}
+- Sketch > Conté Crayon… · `effect.dialog` {"effect": "sketch.conteCrayon"}
+- Sketch > Graphic Pen… · `effect.dialog` {"effect": "sketch.graphicPen"}
+- Sketch > Halftone Pattern… · `effect.dialog` {"effect": "sketch.halftonePattern"}
+- Sketch > Note Paper… · `effect.dialog` {"effect": "sketch.notePaper"}
+- Sketch > Photocopy… · `effect.dialog` {"effect": "sketch.photocopy"}
+- Sketch > Plaster… · `effect.dialog` {"effect": "sketch.plaster"}
+- Sketch > Reticulation… · `effect.dialog` {"effect": "sketch.reticulation"}
+- Sketch > Stamp… · `effect.dialog` {"effect": "sketch.stamp"}
+- Sketch > Torn Edges… · `effect.dialog` {"effect": "sketch.tornEdges"}
+- Sketch > Water Paper… · `effect.dialog` {"effect": "sketch.waterPaper"}
+- Stylize > Glowing Edges… · `effect.dialog` {"effect": "stylize.glowingEdges"}
+- Texture > Craquelure… · `effect.dialog` {"effect": "texture.craquelure"}
+- Texture > Grain… · `effect.dialog` {"effect": "texture.grain"}
+- Texture > Mosaic Tiles… · `effect.dialog` {"effect": "texture.mosaicTiles"}
+- Texture > Patchwork… · `effect.dialog` {"effect": "texture.patchwork"}
+- Texture > Stained Glass… · `effect.dialog` {"effect": "texture.stainedGlass"}
+- Texture > Texturizer… · `effect.dialog` {"effect": "texture.texturizer"}
+- Video > De-Interlace… · `effect.dialog` {"effect": "video.deinterlace"}
+- Video > NTSC Colors · `effect.apply` {"effect": "video.ntscColors"}
+
+## View
+
+- Outline · **Cmd+Y** · `view.outline`
+- Overprint Preview · **Cmd+Alt+Shift+Y** · `view.overprintPreview`
+- Pixel Preview · **Cmd+Alt+Y** · `view.pixelPreview`
+- Trim View · `view.trimView`
+- Presentation Mode · **Shift+F** · `view.presentation`
+- Screen Mode > Normal Screen Mode · **F** · `view.screenMode` {"mode": 0}
+- Screen Mode > Full Screen Mode with Menu Bar · **F** · `view.screenMode` {"mode": 1}
+- Screen Mode > Full Screen Mode · **F** · `view.screenMode` {"mode": 2}
+- Proof Setup > Working CMYK · `view.proofSetup` {"proof": true, "target": "workingCmyk"}
+- Proof Setup > Legacy Macintosh RGB (Gamma 1.8) · `view.proofSetup` {"proof": true, "target": "legacyMacRgb"}
+- Proof Setup > Internet Standard RGB (sRGB) · `view.proofSetup` {"proof": true, "target": "srgb"}
+- Proof Setup > Monitor RGB · `view.proofSetup` {"proof": true, "target": "monitorRgb"}
+- Proof Setup > Color blindness – Protanopia-type · `view.proofSetup` {"proof": true, "target": "protanopia"}
+- Proof Setup > Color blindness – Deuteranopia-type · `view.proofSetup` {"proof": true, "target": "deuteranopia"}
+- Proof Setup > Color blindness – Tritanopia-type · `view.proofSetup` {"proof": true, "target": "tritanopia"}
+- Proof Setup > Customize… · `window.panel` {"panel": "separations"}
+- Proof Colors · `view.proofColors`
+- Zoom In · **Cmd+=** · `view.zoomIn`
+- Zoom Out · **Cmd+-** · `view.zoomOut`
+- Fit Artboard in Window · **Cmd+0** · `view.fitArtboard`
+- Fit All in Window · **Cmd+Alt+0** · `view.fitAll`
+- Actual Size · **Cmd+1** · `view.actualSize`
+- Rotate View > 0° · `view.rotate` {"angle": 0.0}
+- Rotate View > 15° · `view.rotate` {"angle": 15.0}
+- Rotate View > 30° · `view.rotate` {"angle": 30.0}
+- Rotate View > 45° · `view.rotate` {"angle": 45.0}
+- Rotate View > 60° · `view.rotate` {"angle": 60.0}
+- Rotate View > 90° · `view.rotate` {"angle": 90.0}
+- Rotate View > 180° · `view.rotate` {"angle": 180.0}
+- Rotate View > -15° · `view.rotate` {"angle": -15.0}
+- Rotate View > -30° · `view.rotate` {"angle": -30.0}
+- Rotate View > -45° · `view.rotate` {"angle": -45.0}
+- Rotate View > -60° · `view.rotate` {"angle": -60.0}
+- Rotate View > -90° · `view.rotate` {"angle": -90.0}
+- Rotate View to Selection · `view.rotateToSelection`
+- Reset Rotate View · **Cmd+Shift+1** · `view.rotateReset`
+- Hide Edges · **Cmd+H** · `view.edges`
+- Hide Artboards · **Cmd+Shift+H** · `view.artboards`
+- Show Print Tiling · `view.printTiling`
+- Hide Slices · `view.slices.hide`
+- Lock Slices · `view.slices.lock`
+- Hide Template · **Cmd+Shift+W** · `view.template`
+- Rulers > Show Rulers · **Cmd+R** · `view.rulers`
+- Rulers > Change to Global Rulers · **Cmd+Alt+R** · `view.globalRulers`
+- Rulers > Show Video Rulers · `view.videoRulers`
+- Hide Bounding Box · **Cmd+Shift+B** · `view.boundingBox`
+- Show Transparency Grid · **Cmd+Shift+D** · `view.transparencyGrid`
+- Hide Text Threads · **Cmd+Shift+Y** · `view.textThreads`
+- Hide Gradient Annotator · **Cmd+Alt+G** · `view.gradientAnnotator`
+- Hide Corner Widget · `view.cornerWidget`
+- Show Live Paint Gaps · `view.livePaintGaps`
+- Guides > Hide Guides · **Cmd+;** · `view.guides`
+- Guides > Lock Guides · **Cmd+Alt+;** · `view.guides.lock`
+- Guides > Make Guides · **Cmd+5** · `view.guides.make`
+- Guides > Release Guides · **Cmd+Alt+5** · `view.guides.release`
+- Guides > Clear Guides · `view.guides.clear`
+- Smart Guides · **Cmd+U** · `view.smartGuides`
+- Perspective Grid > Show Grid · **Cmd+Shift+I** · `perspective.grid.show`
+- Perspective Grid > Show Rulers · `perspective.grid.rulers`
+- Perspective Grid > Snap to Grid · `perspective.grid.snap`
+- Perspective Grid > Lock Grid · `perspective.grid.lock`
+- Perspective Grid > Lock Station Point · `perspective.grid.lockStation`
+- Perspective Grid > Define Grid… · `ui.perspectiveGridDialog`
+- Perspective Grid > One Point Perspective > [1P-Normal View] · `perspective.grid.preset` {"kind": 1}
+- Perspective Grid > One Point Perspective > [1P-Low View] · `perspective.grid.preset` {"name": "[1P-Low View]"}
+- Perspective Grid > One Point Perspective > [1P-High View] · `perspective.grid.preset` {"name": "[1P-High View]"}
+- Perspective Grid > Two Point Perspective > [2P-Normal View] · `perspective.grid.preset` {"kind": 2}
+- Perspective Grid > Two Point Perspective > [2P-Low View] · `perspective.grid.preset` {"name": "[2P-Low View]"}
+- Perspective Grid > Two Point Perspective > [2P-High View] · `perspective.grid.preset` {"name": "[2P-High View]"}
+- Perspective Grid > Three Point Perspective > [3P-Normal View] · `perspective.grid.preset` {"kind": 3}
+- Perspective Grid > Three Point Perspective > [3P-Low View] · `perspective.grid.preset` {"name": "[3P-Low View]"}
+- Perspective Grid > Save Grid as Preset… · `ui.savePerspectivePreset`
+- Show Grid · **Cmd+'** · `view.grid`
+- Snap to Grid · **Cmd+Shift+'** · `view.snapToGrid`
+- Snap to Pixel · `view.snapToPixel`
+- Snap to Point · **Cmd+Alt+'** · `view.snapToPoint`
+- Snap to Glyph · `view.snapToGlyph`
+- New View… · `view.saved.new`
+- Edit Views… · `view.saved.edit`
+
+## Window
+
+- New Window · `window.newWindow`
+- Arrange > Cascade · `None`
+- Arrange > Tile · `None`
+- Arrange > Float in Window · `None`
+- Arrange > Consolidate All Windows · `None`
+- Workspace > Essentials · `window.workspace` {"name": "Essentials"}
+- Workspace > Essentials Classic · `window.workspace` {"name": "Essentials Classic"}
+- Workspace > Automation · `window.workspace` {"name": "Automation"}
+- Workspace > Layout · `window.workspace` {"name": "Layout"}
+- Workspace > Painting · `window.workspace` {"name": "Painting"}
+- Workspace > Printing and Proofing · `window.workspace` {"name": "Printing and Proofing"}
+- Workspace > Tracing · `window.workspace` {"name": "Tracing"}
+- Workspace > Typography · `window.workspace` {"name": "Typography"}
+- Workspace > Web · `window.workspace` {"name": "Web"}
+- Workspace > Touch · `window.workspace` {"name": "Touch"}
+- Workspace > Reset Essentials · `window.workspace.reset`
+- Workspace > New Workspace… · `window.workspace.new`
+- Workspace > Manage Workspaces… · `window.workspace.manage`
+- Control · `window.control`
+- Contextual Task Bar · `window.taskBar`
+- Tools · `window.toolbar`
+- Toolbars > Advanced · `window.toolbarAdvanced`
+- Toolbars > Double Column · `window.toolbarColumns`
+- Actions · `window.panel` {"panel": "actions", "toggle": true}
+- Align · **Shift+F7** · `window.panel` {"panel": "align", "toggle": true}
+- Appearance · **Shift+F6** · `window.panel` {"panel": "appearance", "toggle": true}
+- Artboards · `window.panel` {"panel": "artboards", "toggle": true}
+- Asset Export · `window.panel` {"panel": "assetExport", "toggle": true}
+- Attributes · **Cmd+F11** · `window.panel` {"panel": "attributes", "toggle": true}
+- Blend · `window.panel` {"panel": "blend", "toggle": true}
+- Brushes · **F5** · `window.panel` {"panel": "brushes", "toggle": true}
+- Color · **F6** · `window.panel` {"panel": "color", "toggle": true}
+- Color Guide · **Shift+F3** · `window.panel` {"panel": "colorGuide", "toggle": true}
+- Color Themes · `window.panel` {"panel": "colorThemes", "toggle": true}
+- CSS Properties · `window.panel` {"panel": "cssProperties", "toggle": true}
+- Document Info · `window.panel` {"panel": "docInfo", "toggle": true}
+- Flattener Preview · `window.panel` {"panel": "flattenerPreview", "toggle": true}
+- Gradient · **Cmd+F9** · `window.panel` {"panel": "gradient", "toggle": true}
+- Graphic Styles · **Shift+F5** · `window.panel` {"panel": "graphicStyles", "toggle": true}
+- History · `window.panel` {"panel": "history", "toggle": true}
+- Image Trace · `window.panel` {"panel": "imageTrace", "toggle": true}
+- Info · **Cmd+F8** · `window.panel` {"panel": "info", "toggle": true}
+- Layers · **F7** · `window.panel` {"panel": "layers", "toggle": true}
+- Libraries · `window.panel` {"panel": "libraries", "toggle": true}
+- Links · `window.panel` {"panel": "links", "toggle": true}
+- Magic Wand · `window.panel` {"panel": "magicWand", "toggle": true}
+- Navigator · `window.panel` {"panel": "navigator", "toggle": true}
+- Pathfinder · **Cmd+Shift+F9** · `window.panel` {"panel": "pathfinder", "toggle": true}
+- Pattern Options · `window.panel` {"panel": "patternOptions", "toggle": true}
+- Properties · `window.panel` {"panel": "properties", "toggle": true}
+- Separations Preview · `window.panel` {"panel": "separations", "toggle": true}
+- Stroke · **Cmd+F10** · `window.panel` {"panel": "stroke", "toggle": true}
+- SVG Interactivity · `window.panel` {"panel": "svgInteractivity", "toggle": true}
+- Swatches · `window.panel` {"panel": "swatches", "toggle": true}
+- Symbols · **Cmd+Shift+F11** · `window.panel` {"panel": "symbols", "toggle": true}
+- Transform · **Shift+F8** · `window.panel` {"panel": "transform", "toggle": true}
+- Transparency · **Cmd+Shift+F10** · `window.panel` {"panel": "transparency", "toggle": true}
+- Type > Character · **Cmd+T** · `window.panel` {"panel": "character", "toggle": true}
+- Type > Character Styles · `window.panel` {"panel": "charStyles", "toggle": true}
+- Type > Glyphs · `window.panel` {"panel": "glyphs", "toggle": true}
+- Type > OpenType · **Cmd+Alt+Shift+T** · `window.panel` {"panel": "openType", "toggle": true}
+- Type > Paragraph · **Cmd+Alt+T** · `window.panel` {"panel": "paragraph", "toggle": true}
+- Type > Paragraph Styles · `window.panel` {"panel": "paraStyles", "toggle": true}
+- Type > Tabs · **Cmd+Shift+T** · `window.panel` {"panel": "tabs", "toggle": true}
+- Variables · `window.panel` {"panel": "variables", "toggle": true}
+- Brush Libraries > Art Ribbons · `window.brushLibrary` {"library": "art-ribbons"}
+- Brush Libraries > Calligraphic Nibs · `window.brushLibrary` {"library": "calligraphic-nibs"}
+- Brush Libraries > Pattern Borders · `window.brushLibrary` {"library": "pattern-borders"}
+- Brush Libraries > Scatter Shapes · `window.brushLibrary` {"library": "scatter-shapes"}
+- Brush Libraries > Other Library… · `window.brushLibrary.other`
+- Brush Libraries > Save Brushes… · `ui.saveBrushLibrary`
+- Graphic Style Libraries > Shadows and Glows · `window.graphicStyleLibrary` {"library": "shadows-glows"}
+- Graphic Style Libraries > Outlines and Rules · `window.graphicStyleLibrary` {"library": "outlines-rules"}
+- Graphic Style Libraries > Hand-Drawn · `window.graphicStyleLibrary` {"library": "hand-drawn"}
+- Graphic Style Libraries > Gradient Finishes · `window.graphicStyleLibrary` {"library": "gradient-finishes"}
+- Graphic Style Libraries > Shape Effects · `window.graphicStyleLibrary` {"library": "shape-effects"}
+- Graphic Style Libraries > Blends and Transparency · `window.graphicStyleLibrary` {"library": "blends-transparency"}
+- Graphic Style Libraries > Other Library… · `window.graphicStyleLibrary.other`
+- Graphic Style Libraries > Save Graphic Style Library… · `ui.saveGraphicStyleLibrary`
+- Swatch Libraries > Default Swatches · `swatch.resetDefaults`
+- Swatch Libraries > Web Safe 216 · `window.swatchLibrary` {"library": "web-safe-216"}
+- Swatch Libraries > Grays and Neutrals · `window.swatchLibrary` {"library": "grays-neutrals"}
+- Swatch Libraries > Earth Tones · `window.swatchLibrary` {"library": "earth-tones"}
+- Swatch Libraries > Skin Tone Ramps · `window.swatchLibrary` {"library": "skin-tone-ramps"}
+- Swatch Libraries > Pastels · `window.swatchLibrary` {"library": "pastels"}
+- Swatch Libraries > Brights · `window.swatchLibrary` {"library": "brights"}
+- Swatch Libraries > Metallic Gradients · `window.swatchLibrary` {"library": "metallic-gradients"}
+- Swatch Libraries > Perceptual Scales · `window.swatchLibrary` {"library": "perceptual-scales"}
+- Swatch Libraries > Harmony Sets · `window.swatchLibrary` {"library": "harmony-sets"}
+- Swatch Libraries > Gradients > Spectrum Gradients · `window.swatchLibrary` {"library": "spectrum-gradients"}
+- Swatch Libraries > Gradients > Sky Gradients · `window.swatchLibrary` {"library": "sky-gradients"}
+- Swatch Libraries > Gradients > Neutral Gradients · `window.swatchLibrary` {"library": "neutral-gradients"}
+- Swatch Libraries > Gradients > Duotone Gradients · `window.swatchLibrary` {"library": "duotone-gradients"}
+- Swatch Libraries > Gradients > Radial Glows · `window.swatchLibrary` {"library": "radial-glows"}
+- Swatch Libraries > Other Library… · `window.swatchLibrary.other`
+- Swatch Libraries > Save Swatch Library… · `ui.saveSwatchLibrary`
+- Symbol Libraries > Basic Shapes · `window.symbolLibrary` {"library": "basic-shapes"}
+- Symbol Libraries > Other Library… · `window.symbolLibrary.other`
+- Symbol Libraries > Save Symbols… · `ui.saveSymbolLibrary`
+
+## Help
+
+- Join Our Discord · `help.discord`
+- ArtCraft Website · `help.website`
+- VectorCraft on getartcraft.com · `help.appPage`
+- VectorCraft on GitHub · `help.github`
+- Search Commands… · **Cmd+Shift+/** · `help.commandPalette`
+- VectorCraft Help… · **F1** · `None`
+- Check for Updates… · `help.checkForUpdates`
+- About VectorCraft · `help.about`
