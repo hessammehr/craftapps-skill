@@ -1,0 +1,13 @@
+{
+  "id": "vectorcraft", "name": "VectorCraft", "kind": "vector editor (Illustrator-style)",
+  "binary": {"darwin": "/Applications/VectorCraft.app/Contents/MacOS/VectorCraft", "linux": "vectorcraft", "win32": "%LOCALAPPDATA%/Programs/ArtCraft/VectorCraft/vectorcraft.exe"},
+  "cli": {"linux": "vectorcraft-cli", "win32": "%LOCALAPPDATA%/Programs/ArtCraft/VectorCraft/vectorcraft-cli.exe"},
+  "port": {"default": 12345, "env": "VECTORCRAFT_CONTROL_PORT"},
+  "profile_env": "VECTORCRAFT_CONFIG_DIR",
+  "auth": {"kind": "none"},
+  "menu_key": "command",
+  "batch": {"command": "command.batch", "steps_key": "commands", "label_key": "label"},
+  "undo_group": {"begin": "edit.undoGroup.begin", "end": "edit.undoGroup.end"},
+  "render": {"method": "ui.render", "artboard_key": "artboard"},
+  "docs": ["https://raw.githubusercontent.com/storytold/vectorcraft/main/docs/control-protocol.md", "https://raw.githubusercontent.com/storytold/vectorcraft/main/docs/mcp.md"]
+}

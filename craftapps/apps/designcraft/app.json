@@ -1,0 +1,11 @@
+{
+  "id": "designcraft", "name": "DesignCraft", "kind": "page layout editor (InDesign-style)",
+  "binary": {"darwin": "/Applications/DesignCraft.app/Contents/MacOS/DesignCraft", "linux": "designcraft", "win32": "%LOCALAPPDATA%/Programs/ArtCraft/DesignCraft/designcraft.exe"},
+  "cli": {"darwin": "/Applications/DesignCraft.app/Contents/MacOS/designcraft-cli", "linux": "designcraft-cli", "win32": "%LOCALAPPDATA%/Programs/ArtCraft/DesignCraft/designcraft-cli.exe"},
+  "port": {"default": 12347, "env": "DESIGNCRAFT_CONTROL_PORT"},
+  "profile_env": "DESIGNCRAFT_CONFIG_DIR",
+  "auth": {"kind": "none"},
+  "menu_key": "command",
+  "render": {"method": "ui.render", "artboard_key": "page"},
+  "docs": ["https://raw.githubusercontent.com/storytold/designcraft/main/docs/control-protocol.md", "https://raw.githubusercontent.com/storytold/designcraft/main/docs/mcp.md", "https://raw.githubusercontent.com/storytold/designcraft/main/docs/agents.md"]
+}

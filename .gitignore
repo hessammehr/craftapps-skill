@@ -1,8 +1,6 @@
 __pycache__/
 *.pyc
 .DS_Store
-# fetched by scripts/build_reference.py (large; the app's own docs)
-vectorcraft/references/upstream/
 # demo recordings (frames + event logs); only the composed video is kept
 rec/
 demo/rec/

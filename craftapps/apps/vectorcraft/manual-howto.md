@@ -10,9 +10,9 @@ Option, Shift ⇧). On Windows/Linux, Cmd is Ctrl and Alt is Alt.
    step: *where* (tool, menu path, panel), *what* (click, drag, type), *values* (exact numbers, colours,
    names), and *what they should see*. Get menu paths and shortcuts from the app, not from memory:
    ```bash
-   uv run ~/.claude/skills/vectorcraft/scripts/vc.py how "Outline Stroke"   # menu path(s), shortcut, params
-   uv run ~/.claude/skills/vectorcraft/scripts/vc.py how arrange            # several matches
-   uv run ~/.claude/skills/vectorcraft/scripts/vc.py how ellipse            # tool + shortcut + which flyout
+   craft.py vectorcraft how "Outline Stroke"   # menu path(s), shortcut, params
+   craft.py vectorcraft how arrange            # several matches
+   craft.py vectorcraft how ellipse            # tool + shortcut + which flyout
    grep -n "Clipping Mask" ~/.claude/skills/vectorcraft/references/menus.md
    ```
    Commands with no menu entry (`shape.*`, `path.create`, `text.create`, `paint.*`, `stroke.set`…) are done
@@ -27,10 +27,10 @@ Option, Shift ⇧). On Windows/Linux, Cmd is Ctrl and Alt is Alt.
      `effect.dialog {effect}` for an effect. Read what is open with `ui.inspect` → `ui.dialog`; fill fields with
      `ui.dialog.set {fields: [{field, value}]}`; close with `ui.dialog.cancel` if they decline;
    - select the tool they should use: `ui.tool.select {tool}` (the toolbar button lights up);
-   - take `vc.py shot win.png` and look at it to describe positions accurately ("top-right panel, third tab").
-   - Undo anything you demonstrated if they want to do it themselves: `vc.py undo`.
-3. **Check my work.** They do it by hand, then you inspect and give precise feedback: `vc.py tree` (names,
-   bounds, colours), `vc.py node <id>` (font, size, leading, stroke), and `vc.py render` + `compare.py`
+   - take `craft.py vectorcraft shot win.png` and look at it to describe positions accurately ("top-right panel, third tab").
+   - Undo anything you demonstrated if they want to do it themselves: `craft.py vectorcraft undo`.
+3. **Check my work.** They do it by hand, then you inspect and give precise feedback: `craft.py vectorcraft tree` (names,
+   bounds, colours), `craft.py vectorcraft call document.node <id>` (font, size, leading, stroke), and `craft.py vectorcraft render` + `compare.py`
    against a target render. Feedback names the object, the property, the value they have and the value
    wanted, and how to fix it ("the 20 label sits 1.5 pt low: select it, then in the Transform panel set
    Y to 152.2").
@@ -69,7 +69,7 @@ Adapt depth to the person: experienced Illustrator users want terse paths ("Obje
 | Stroke weight, dashes, arrowheads | Window › Stroke (Cmd+F10): Weight, Cap, Corner, Align, **Dashed Line** (dash/gap boxes), **Arrowheads** (start/end menus, Scale, Align: tip at end) | `stroke.set {weight, dash, startArrow, endArrow, arrowAlign}` |
 | Gradient | Window › Gradient (Cmd+F9): Type linear/radial, click the ramp to add stops, double-click a stop for its colour; Gradient tool (G) to drag the direction | `paint.setFill {gradient}` |
 | Transparency | Window › Transparency (Cmd+Shift+F10): opacity, blend mode | `object.setProps {opacity, blend}` |
-| TikZ-style arrow | Stroke panel › Arrowheads: **Arrow** ≈ TikZ stealth, **Concave** ≈ latex; the TikZ `to` (curved open barbs) has no built-in, so copy an existing one (Alt-drag) and rotate it, or ask the agent | `vc.py arrow … --tip to` |
+| TikZ-style arrow | Stroke panel › Arrowheads: **Arrow** ≈ TikZ stealth, **Concave** ≈ latex; the TikZ `to` (curved open barbs) has no built-in, so copy an existing one (Alt-drag) and rotate it, or ask the agent | `apps/vectorcraft/tools.py arrow … --tip to` |
 | Equation | No equation editor. Typeset elsewhere (LaTeX/LaTeXiT, as PDF with outlined fonts) → File › Place… (Link off) and line its baseline up with Smart Guides; or ask the agent (`latex_math.py`) | `latex_math.py` (outlines, `--replace` to edit) |
 | Text label | Type tool (T): click = point type, drag = area type (wraps). Character panel (Cmd+T): font, size, leading, tracking. Paragraph (Cmd+Alt+T): alignment | `text.create`, `text.setStyle` |
 | Subscript / superscript | Select the characters with the Type tool → Character panel (Cmd+T), bottom row of buttons: T¹ superscript, T₁ subscript (also All Caps, Small Caps, Underline, Strikethrough) | `text.setFormat {position, start, end}` |
@@ -112,7 +112,7 @@ Then offer: "Want me to do this step while you watch, or check yours when you're
 
 ## Translating a script into steps
 
-Walk the script's commands in order. For each, `vc.py how <command>` gives the menu path/shortcut, or the
+Walk the script's commands in order. For each, `craft.py vectorcraft how <command>` gives the menu path/shortcut, or the
 table above the tool/panel. Merge consecutive commands that are one gesture for a person (create +
 `paint.setFill` = "draw it, then click the fill swatch…"), and drop automation-only steps (`document.activate`,
 `select.set` → "click it", undo groups).

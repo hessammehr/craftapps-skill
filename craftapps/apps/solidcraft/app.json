@@ -1,0 +1,13 @@
+{
+  "id": "solidcraft", "name": "SolidCraft", "kind": "parametric 3D CAD (Fusion-style)",
+  "binary": {"darwin": "/Applications/SolidCraft.app/Contents/MacOS/SolidCraft", "linux": "solidcraft", "win32": "%LOCALAPPDATA%/Programs/SolidCraft/solidcraft.exe"},
+  "cli": {"darwin": "/Applications/SolidCraft.app/Contents/MacOS/solidcraft-cli", "linux": "solidcraft-cli", "win32": "%LOCALAPPDATA%/Programs/SolidCraft/solidcraft-cli.exe"},
+  "port": {"default": 27878, "env": "SOLIDCRAFT_CONTROL_PORT"},
+  "profile_env": "SOLIDCRAFT_SETTINGS_DIR",
+  "auth": {"kind": "token_field", "env": "SOLIDCRAFT_CONTROL_TOKEN",
+           "token_dir": {"darwin": "~/Library/Application Support/SolidCraft/control", "linux": "~/.local/share/solidcraft/control", "win32": "%LOCALAPPDATA%/SolidCraft/control"},
+           "port_file": "current.port"},
+  "batch": {"method": "engine.batch", "steps_key": "commands"},
+  "render": {"method": "ui.render"},
+  "docs": ["https://raw.githubusercontent.com/tangency-labs/solidcraft/main/docs/control-protocol.md", "https://raw.githubusercontent.com/tangency-labs/solidcraft/main/docs/mcp.md"]
+}

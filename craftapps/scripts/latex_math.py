@@ -3,7 +3,7 @@
 # requires-python = ">=3.10"
 # dependencies = []
 # ///
-"""Typeset LaTeX (math, chemistry, units, even small TikZ) and place it in VectorCraft as vector outlines.
+"""Typeset LaTeX (math, chemistry, units, even small TikZ) and place it as vector art in VectorCraft or DesignCraft.
 
   latex_math.py 'E = mc^2' --x 40 --y 120 [--align left|center|right] [--size 12] [--font cm|sans|arial] [--color #000000] [--display]
                [--text] [--preamble '\\usepackage{mhchem}'] [--engine pdflatex|lualatex] [--name N]
@@ -29,7 +29,7 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from vc import VC, VCError, get_data  # noqa: E402
+from craft import Craft, CraftError as VCError  # noqa: E402
 
 FONTS = {
     "cm": r"\usepackage[T1]{fontenc}\usepackage{lmodern}",
@@ -79,11 +79,26 @@ def typeset(src, size=12.0, font="cm", color="#000000", display=False, text=Fals
     return work / "m.pdf", w, h, d
 
 
+def get_data(vc, oid):
+    d = (vc.run("document.node", {"id": oid}).get("attrs") or {}).get("data") or {}
+    return dict(d) if isinstance(d, list) else d
+
+
+def place_designcraft(vc, pdf, x, top, w):
+    """A vector graphic on the page, sized from the TeX box. DesignCraft keeps the PDF live inside the frame."""
+    r = vc.run("file.place", {"path": str(pdf), "x": x, "y": top, "width": w, "pdfCrop": "crop"})
+    return r.get("id")
+
+
 def place(vc, spec, below_id=None):
     pdf, w, h, d = typeset(spec["src"], spec["size"], spec["font"], spec["color"], spec["display"],
                            spec["text"], spec["preamble"], spec["engine"])
     x = spec["x"] - w * {"left": 0, "center": 0.5, "right": 1}[spec.get("align") or "left"]
     y = spec["y"]
+    if vc.app == "designcraft":
+        keep = pdf.parent.parent / f"vc-latex-{abs(hash(spec['src']))}.pdf"  # the frame links its file: keep it
+        shutil.copy(pdf, keep)
+        return place_designcraft(vc, keep, x, y - h, w), (w, h, d)
     cx, cy = x + w / 2, y - h + (h + d) / 2  # page = the TeX box; its baseline is h below the top
     r = vc.run("file.place", {"path": str(pdf), "link": False, "textAs": "outlines", "crop": "crop", "at": [cx, cy]})
     gid = r["ids"][0]
@@ -105,6 +120,7 @@ def spec_of(vc, oid):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("src", nargs="?")
+    ap.add_argument("--app", default="vectorcraft", help="vectorcraft (default) or designcraft")
     ap.add_argument("--x", type=float)
     ap.add_argument("--y", type=float)
     ap.add_argument("--size", type=float)
@@ -119,7 +135,7 @@ def main():
     ap.add_argument("--replace", type=int, metavar="ID")
     ap.add_argument("--list", action="store_true")
     a = ap.parse_args()
-    vc = VC()
+    vc = Craft(a.app)
     if a.list:
         for m in vc.run("document.find", {"name": "math: ", "limit": 500})["matches"]:
             try:

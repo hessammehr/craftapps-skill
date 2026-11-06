@@ -1,8 +1,8 @@
 # Recipes (tested on VectorCraft, Oct 2026)
 
 All snippets are `command.batch` / `vc.seq` steps unless shown as calls. `vc` is
-`sys.path.insert(0, os.path.expanduser("~/.claude/skills/vectorcraft/scripts")); from vc import VC; vc = VC()`.
-Units are pt, y down. Look up any command's full parameters with `vc.py params <id>`.
+`sys.path.insert(0, "<skill>/scripts"); from craft import Craft; vc = Craft("vectorcraft")`.
+Units are pt, y down. Look up any command's full parameters with `craft.py vectorcraft params <id>`.
 
 ## Documents
 
@@ -126,7 +126,7 @@ vc.run("document.activate", {"index": dst}); vc.run("edit.pasteInPlace")    # sa
 ```python
 vc.render("/abs/out.png", artboard=0, scale=2)                      # ui.render: artboard only, no UI
 vc.call("ui.screenshot", {"path": "/abs/win.png"})                  # the whole window (for teaching)
-vc.run("document.export", {"path": "/abs/fig.svg"})                 # then: vc.py svgunits fig.svg mm
+vc.run("document.export", {"path": "/abs/fig.svg"})                 # then: apps/vectorcraft/tools.py svgunits fig.svg mm
 vc.run("document.export", {"path": "/abs/fig.svg", "svg": {"preserveEditing": True, "outlineText": False}})
 vc.run("document.export", {"path": "/abs/fig.pdf"})                 # every artboard, one page each
 vc.run("document.export", {"path": "/abs/fig.pdf", "range": "2"})
@@ -135,7 +135,7 @@ vc.run("document.export", {"path": "/abs/fig.png", "useArtboards": True, "ppi": 
 vc.run("document.save", {"path": "/abs/fig - v4.vectorcraft"})       # native; the document now has this path
 ```
 ```bash
-uv run scripts/compare.py mine.png target.png --pt-scale 2 --blur 1.5 --out diff.png
+uv run <skill>/scripts/compare.py mine.png target.png --pt-scale 2 --blur 1.5 --out diff.png
 ```
 
 ## One undo step for scripted logic
@@ -152,15 +152,15 @@ Or `vc.seq([...], label)` with `"$N.id"` references (rolls back on error). Or `v
 ## TikZ arrows and LaTeX math
 
 ```python
-from vc import tikz_arrow, get_data
+sys.path.insert(0, "<skill>/apps/vectorcraft"); from tools import tikz_arrow, get_data
 g = tikz_arrow(vc, (20, 20), (180, 20), tip="to", width=1.0)            # TikZ ->   → group id
 g = tikz_arrow(vc, (20, 60), (180, 80), tip="to", width=1, bend=30)     # to[bend left=30]
 g = tikz_arrow(vc, (20, 100), (180, 100), tip="stealth", both=True, color="#555555")
 spec = json.loads(get_data(vc, g)["tikz"])                               # to redraw with new endpoints
 ```
 ```bash
-uv run scripts/latex_math.py '\frac{\partial c}{\partial t} = D\nabla^2 c' --x 40 --y 60 --size 11 --font sans
-uv run scripts/latex_math.py --replace <id> 'new source'      # same place and options
+uv run <skill>/scripts/latex_math.py '\frac{\partial c}{\partial t} = D\nabla^2 c' --x 40 --y 60 --size 11 --font sans
+uv run <skill>/scripts/latex_math.py --replace <id> 'new source'      # same place and options
 ```
 
 ## Effects (live, editable in the Appearance panel)
@@ -174,7 +174,7 @@ vc.run("effect.list")                                               # ids + defa
 
 ## Pathfinder / booleans
 
-`vc.py find pathfinder` → `object.pathfinder.unite|minusFront|intersect|exclude|divide|…` on the selection (exact
+`craft.py vectorcraft find pathfinder` → `object.pathfinder.unite|minusFront|intersect|exclude|divide|…` on the selection (exact
 booleans). Shape Builder is the `shapeBuilder` tool (drive with `ui.pointer`).
 
 ## Driving a tool like the mouse (rarely needed; for demos)

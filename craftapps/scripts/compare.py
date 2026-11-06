@@ -10,7 +10,7 @@
 Both images are resized to A's size if needed (a warning says so). Prints the share of
 differing pixels and the bounding boxes of the largest differing regions in A's pixel
 coordinates and, when --pt-scale is given (pixels per point used for the render), in
-document points so they can be matched against `vc.py tree` bounds. Writes a diff image
+document points so they can be matched against `craft.py APP tree` bounds. Writes a diff image
 (A greyed out, differences in red where only A has ink, blue where only B has ink).
 """
 import argparse

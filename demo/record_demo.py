@@ -13,8 +13,8 @@
       while sampling the VectorCraft window; Claude's messages and tool calls become the captions
   record_demo.py record OUT [--port 12346] [--interval 1.0]
       only sample the window (until OUT/STOP exists or Ctrl-C), for sessions driven some other way.
-      Point VC_LOG at OUT/events.jsonl so vc.py logs calls, and mark prompts/narration/results with
-      `vc.py note --prompt|--result|TEXT`
+      Point CRAFT_LOG at OUT/events.jsonl so craft.py logs calls, and mark prompts/narration/results with
+      `craft.py note --prompt|--result|TEXT`
   record_demo.py compose OUT --out demo.mp4 [--gif demo.gif] [--speed 6] [--title T] [--footer F]
       intro → for each prompt: typed prompt card, time-lapse with captions, result card → outro
 
@@ -40,16 +40,15 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 HERE = Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE.parent / "vectorcraft" / "scripts"))
+sys.path.insert(0, str(HERE.parent / "craftapps" / "scripts"))
 W, H, FPS = 1280, 800, 30
 
 
 # ----------------------------------------------------------------------------- recording
-def sampler(out: Path, port: int, interval: float, stop: threading.Event):
-    from vc import VC, VCError
+def sampler(out: Path, port: int, interval: float, stop: threading.Event, a_app: str = "vectorcraft"):
+    from craft import Craft, CraftError as VCError
 
-    os.environ["VECTORCRAFT_PORT"] = str(port)
-    vc = VC(port=port)
+    vc = Craft(a_app, port=port)
     (out / "frames").mkdir(parents=True, exist_ok=True)
     tmp = Path(tempfile.mkdtemp()) / "shot.png"
     last = None
@@ -79,7 +78,7 @@ def cmd_record(a):
     (out / "STOP").unlink(missing_ok=True)
     stop = threading.Event()
     signal.signal(signal.SIGTERM, lambda *_: stop.set())
-    print(f"recording; export VC_LOG={out / 'events.jsonl'}; stop with: touch {out / 'STOP'}")
+    print(f"recording; export CRAFT_LOG={out / 'events.jsonl'}; stop with: touch {out / 'STOP'}")
     try:
         sampler(out, a.port, a.interval, stop)
     except KeyboardInterrupt:
@@ -92,7 +91,7 @@ def cmd_claude(a):
     stop = threading.Event()
     th = threading.Thread(target=sampler, args=(out, a.port, a.interval, stop), daemon=True)
     th.start()
-    env = dict(os.environ, VECTORCRAFT_PORT=str(a.port), VC_LOG=str(out / "events.jsonl"))
+    env = dict(os.environ, VECTORCRAFT_CONTROL_PORT=str(a.port), CRAFT_LOG=str(out / "events.jsonl"))
     work = out / "work"
     work.mkdir(exist_ok=True)
     try:
@@ -130,9 +129,9 @@ def cmd_launch(a):
     env = dict(os.environ, VECTORCRAFT_CONFIG_DIR=str(prof))
     subprocess.Popen([a.app, "--control", str(a.port)], env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                      start_new_session=True)
-    from vc import VC, VCError
+    from craft import Craft, CraftError as VCError
 
-    vc = VC(port=a.port)
+    vc = Craft("vectorcraft", port=a.port)
     for _ in range(60):
         try:
             vc.call("ui.inspect")
@@ -316,8 +315,8 @@ def main():
                    help="part of the window to show, as fractions (keep 16:10, e.g. 0,0.08,0.78,0.86)")
     p.add_argument("--title", default="VectorCraft agent skill")
     p.add_argument("--subtitle", default="from a plain-language prompt to a publication figure")
-    p.add_argument("--footer", default="github.com/hessammehr/vectorcraft-skill")
-    p.add_argument("--footer-sub", default="an agent skill for the VectorCraft vector editor")
+    p.add_argument("--footer", default="github.com/hessammehr/craftapps-skill")
+    p.add_argument("--footer-sub", default="an agent skill for the Craft apps")
     a = ap.parse_args()
     {"launch": cmd_launch, "record": cmd_record, "claude": cmd_claude, "compose": cmd_compose}[a.cmd](a)
 

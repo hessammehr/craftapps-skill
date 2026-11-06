@@ -28,7 +28,7 @@ No authentication: the port is local only.
 | `app.open` | `{path}` | open any readable format → `{index, title, format, warnings, …}` |
 | `app.save` / `app.export` / `app.quit` | `{path?…}` | host-level save/export (same options as `document.export`); quit asks about unsaved docs |
 
-## Commands worth knowing by family (`vc.py find <family>`)
+## Commands worth knowing by family (`craft.py vectorcraft find <family>`)
 
 `file.*` (new, place, close, export dialogs) · `document.*` (open, save, export, exportPdf, find, node, json,
 activate, setup) · `shape.*` · `path.*` (create, setAnchors, moveAnchors, join, …) · `text.*` / `type.*` ·
@@ -41,7 +41,7 @@ compoundPath, blend, setProps) · `select.*` · `layer.*` · `artboard.*` · `ef
 
 - Open: `tool.options {tool}` (selection → Move; rotate/scale/reflect/shear; artboard → Artboard Options),
   `ui.paramDialog {command, label?, params}` (any command), `effect.dialog {effect, index?}`, the `ui.*Dialog`
-  and `ui.*Options` commands (`vc.py find dialog`).
+  and `ui.*Options` commands (`craft.py vectorcraft find dialog`).
 - Read: `ui.inspect` → `ui.dialog = {kind, fields}`. Set: `ui.dialog.set`. Apply: `ui.dialog.confirm`. Abandon:
   `ui.dialog.cancel`.
 - Saves/closes of modified documents open a `saveChanges` dialog (`{"pending": "saveChanges"}`):
