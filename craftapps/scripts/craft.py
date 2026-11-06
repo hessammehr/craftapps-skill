@@ -8,7 +8,7 @@ with optional app-specific logic in apps/<app>/adapter.py.
 
   craft.py apps                              every known app: installed? running? port?
   craft.py APP status                        document, dirty, tool, selection, dialog, busy: what the person sees now
-  craft.py APP launch [--isolated] [--port P] [--roots DIR]... [FILE]   start the app with its control channel
+  craft.py APP launch [--isolated] [--port P] [--roots DIR] [FILE]   start the app with its control channel
   craft.py APP wait [--timeout S] [--on selection|document|dialog|tool|revision]
                                              block until the person changes something; prints what changed
   craft.py APP watch [--interval S]          print one line per state change until stopped
@@ -503,6 +503,8 @@ def launch(c: Craft, isolated=False, port=None, file=None, roots=None) -> dict:
         info["token_file"] = str(tf)
     if m.get("roots"):  # the app refuses every path over the channel outside these folders
         chosen = roots or [str(Path.home())]
+        if len(chosen) > 1 and m["roots"].get("single"):
+            raise CraftError(f"{m['name']} takes one root folder per launch, not {len(chosen)}: pick a folder that holds them all.")
         for r in chosen:
             args += [m["roots"]["read_flag"], str(Path(r).expanduser().resolve()), m["roots"]["write_flag"], str(Path(r).expanduser().resolve())]
         info["roots"] = chosen

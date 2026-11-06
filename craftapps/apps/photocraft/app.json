@@ -5,7 +5,7 @@
   "port": {"default": 12346, "env": "PHOTOCRAFT_CONTROL_PORT"},
   "profile_env": "PHOTOCRAFT_CONFIG_DIR",
   "auth": {"kind": "auth_request", "token_file_flag": "--control-token-file"},
-  "roots": {"read_flag": "--automation-read-root", "write_flag": "--automation-write-root", "required": true},
+  "roots": {"read_flag": "--automation-read-root", "write_flag": "--automation-write-root", "required": true, "single": true},
   "menu_key": "id",
   "screenshot_params": {"focus": false},
   "docs": ["https://raw.githubusercontent.com/storytold/photocraft/main/docs/control-protocol.md", "https://raw.githubusercontent.com/storytold/photocraft/main/docs/mcp.md"]
