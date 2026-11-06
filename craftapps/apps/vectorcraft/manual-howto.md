@@ -13,7 +13,7 @@ Option, Shift ⇧). On Windows/Linux, Cmd is Ctrl and Alt is Alt.
    craft.py vectorcraft how "Outline Stroke"   # menu path(s), shortcut, params
    craft.py vectorcraft how arrange            # several matches
    craft.py vectorcraft how ellipse            # tool + shortcut + which flyout
-   grep -n "Clipping Mask" ~/.claude/skills/vectorcraft/references/menus.md
+   craft.py vectorcraft find clipping
    ```
    Commands with no menu entry (`shape.*`, `path.create`, `text.create`, `paint.*`, `stroke.set`…) are done
    with a **tool** or a **panel** (map below).
@@ -21,7 +21,7 @@ Option, Shift ⇧). On Windows/Linux, Cmd is Ctrl and Alt is Alt.
    happened and where on screen. Let them perform the key click whenever possible:
    - point at an object: `select.set {ids}` (selection handles show it); `view.setZoom` / `view.fitArtboard`
      to frame it;
-   - open the panel they need: `window.panel {panel: "stroke"}` (ids are in `menus.md` › Window);
+   - open the panel they need: `window.panel {panel: "stroke"}` (ids: `craft.py vectorcraft find panel`, or `ui.menu.list`);
    - open a dialog prefilled and let *them* press OK: `tool.options {tool: "selection"}` (Move),
      `"rotate"|"scale"|"reflect"|"shear"`, `ui.paramDialog {command, label, params}` for any command,
      `effect.dialog {effect}` for an effect. Read what is open with `ui.inspect` → `ui.dialog`; fill fields with

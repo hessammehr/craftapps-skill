@@ -40,13 +40,58 @@ def export(c, path, **kw):
     return c.run("document.export", {"path": path, **kw})
 
 
-def render(c, path, scale=None, page=None):
+def render(c, path, scale=None, page=None, artboard=None):
     p = {"path": path}
     if scale:
         p["scale"] = scale
-    if page is not None:
-        p["artboard"] = page
+    board = artboard if artboard is not None else page
+    if board is not None:
+        p["artboard"] = board
     return c.call("ui.render", p)
+
+
+def activate(c, index):
+    return c.run("document.activate", {"index": index})
+
+
+def node(c, oid):
+    return c.run("document.node", {"id": oid})
+
+
+# -- drawing helpers: each returns the new object's id ---------------------------------
+def style(c, oid, fill=None, stroke=None, weight=None):
+    if fill is not None:
+        c.run("paint.setFill", {"ids": [oid], **({"none": True} if fill == "none" else {"color": fill})})
+    if stroke is not None:
+        c.run("paint.setStroke", {"ids": [oid], **({"none": True} if stroke == "none" else {"color": stroke})})
+    if weight is not None:
+        c.run("stroke.set", {"ids": [oid], "weight": weight})
+
+
+def rect(c, x, y, w, h, fill=None, stroke=None, weight=None, **kw):
+    r = c.run("shape.rectangle", {"x": x, "y": y, "width": w, "height": h, **kw})
+    style(c, r["id"], fill, stroke, weight)
+    return r["id"]
+
+
+def ellipse(c, x, y, w, h, fill=None, stroke=None, weight=None):
+    r = c.run("shape.ellipse", {"x": x, "y": y, "width": w, "height": h})
+    style(c, r["id"], fill, stroke, weight)
+    return r["id"]
+
+
+def path(c, d, fill=None, stroke=None, weight=None, **kw):
+    r = c.run("path.create", {"d": d, **kw})
+    style(c, r["id"], fill, stroke, weight)
+    return r["id"]
+
+
+def text(c, x, y, s, size=None, font=None, color=None, **kw):
+    p = {"x": x, "y": y, "text": s, **kw}
+    for k, v in (("size", size), ("font", font), ("color", color)):
+        if v:
+            p[k] = v
+    return c.run("text.create", p)["id"]
 
 
 def tree(c, max_depth=99):

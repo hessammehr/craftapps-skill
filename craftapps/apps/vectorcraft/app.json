@@ -2,7 +2,7 @@
   "id": "vectorcraft", "name": "VectorCraft", "kind": "vector editor (Illustrator-style)",
   "binary": {"darwin": "/Applications/VectorCraft.app/Contents/MacOS/VectorCraft", "linux": "vectorcraft", "win32": "%LOCALAPPDATA%/Programs/ArtCraft/VectorCraft/vectorcraft.exe"},
   "cli": {"linux": "vectorcraft-cli", "win32": "%LOCALAPPDATA%/Programs/ArtCraft/VectorCraft/vectorcraft-cli.exe"},
-  "port": {"default": 12345, "env": "VECTORCRAFT_CONTROL_PORT"},
+  "port": {"default": 12345, "env": "VECTORCRAFT_CONTROL_PORT", "legacy_env": "VECTORCRAFT_PORT"},
   "profile_env": "VECTORCRAFT_CONFIG_DIR",
   "auth": {"kind": "none"},
   "menu_key": "command",

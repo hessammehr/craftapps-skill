@@ -46,6 +46,10 @@ def render(c, path, scale=None, page=None):
     return c.call("ui.render", p)
 
 
+def activate(c, index):
+    return c.run("file.activate", {"index": index})
+
+
 def tree(c, max_depth=99):
     d = c.call("document.inspect")
     s = d.get("settings") or {}

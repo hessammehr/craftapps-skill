@@ -36,7 +36,7 @@ DXF and `.vectorcraft`. Use Illustrator's vocabulary with the person. Read `SKIL
   earlier results work** (`{"id": "$0.id"}`, `{"ids": ["$2.id"]}`). On error it undoes what it did (and only
   that).
 - Python: `from craft import Craft; vc = Craft("vectorcraft"); vc.run(...); vc.batch([...]); vc.seq([...])`, plus helpers
-  `vc.rect/ellipse/path/text/style`. For logic between steps (find → decide → edit), wrap the calls in
+  `vc.rect/ellipse/path/text/style` (VectorCraft's adapter). For logic between steps (find → decide → edit), wrap the calls in
   `edit.undoGroup.begin {label}` / `edit.undoGroup.end` (in `try/finally`) to keep one undo step.
 
 ## Workflows
@@ -132,7 +132,7 @@ math (sansmath) suits Arial figures but isn't Arial. `--font arial` (lualatex, p
 text-mode content in real Arial (e.g. `'Rate $k_\mathrm{obs}$ (s$^{-1}$)' --text --font arial`), but its math
 symbols stay Latin Modern. Units: siunitx follows the text font under `sans`/`arial`.
 
-**TikZ arrows**: `tools.py arrow` / `vc.tikz_arrow()`, with tip geometry copied from PGF's own definitions
+**TikZ arrows**: `tools.py arrow` / `tikz_arrow()` in `tools.py`, with tip geometry copied from PGF's own definitions
 (`to` = TikZ `->`, `latex`, `stealth`), sized from the line width as PGF does. Straight arrows match
 pdflatex output pixel for pixel; 30° bends match to within 0.3 pt.
 ```bash

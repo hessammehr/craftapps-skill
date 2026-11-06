@@ -22,7 +22,7 @@ with optional app-specific logic in apps/<app>/adapter.py.
   craft.py APP families                      commands per family, to see the app's whole surface
   craft.py APP tools                         the toolbar's tools, where the app lists them
   craft.py APP tree [--depth N]              compact outline of the active document
-  craft.py APP open PATH | save PATH | export PATH [JSON]
+  craft.py APP open PATH | save PATH | export PATH [JSON] | activate INDEX (switch tab) | node ID (VectorCraft: one object in full)
   craft.py APP render OUT.png [--scale S] [--page N] | shot OUT.png | undo [N] | redo [N]
   craft.py APP dialog [set JSON | ok | cancel]   read or answer the open dialog, whichever way this app does it
   craft.py APP front                         bring its window forward (a covered window draws no frames, so GUI input waits)
@@ -100,13 +100,15 @@ def find_process(m: dict) -> dict | None:
     """The running app, with the port and token file on its command line, if any."""
     binary = _path(m["binary"].get(PLATFORM)) or m["id"]
     base = os.path.basename(binary).lower()
+    found = []
     for pid, args in _processes():
         a = args.replace("\\", "/")
         if a.startswith(binary.replace("\\", "/")) or a.lower().split(" ")[0].rsplit("/", 1)[-1] == base:
             port = re.search(r"--control[= ](\d+)", args)
             tok = re.search(r"--control-token-file[= ](\S+)", args)
-            return {"pid": pid, "port": int(port.group(1)) if port else None, "token_file": tok.group(1) if tok else None}
-    return None
+            found.append({"pid": pid, "port": int(port.group(1)) if port else None, "token_file": tok.group(1) if tok else None})
+    # an instance with a control port is the one we can talk to
+    return next((f for f in found if f["port"]), found[0] if found else None)
 
 
 def _listening(port: int, host="127.0.0.1") -> bool:
@@ -131,7 +133,7 @@ class Craft:
 
     # -- finding the app ---------------------------------------------------------
     def _resolve_port(self) -> int:
-        env = os.environ.get(self.m["port"]["env"])
+        env = os.environ.get(self.m["port"]["env"]) or os.environ.get(self.m["port"].get("legacy_env", ""))
         proc = find_process(self.m)
         if proc and proc["token_file"]:
             self._token_file = self._token_file or proc["token_file"]
@@ -236,6 +238,17 @@ class Craft:
             self._adapter = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(self._adapter)
         return self._adapter
+
+    def __getattr__(self, name):
+        """App-specific helpers live in the adapter: c.rect(...) in VectorCraft, c.press(...) in SolidCraft."""
+        if not name.startswith("_"):
+            fn = getattr(self.adapter, name, None)
+            if callable(fn):
+                return lambda *a, **kw: fn(self, *a, **kw)
+        raise AttributeError(f"{self.app} has no helper {name!r}")
+
+    def ui(self) -> dict:
+        return self.call("ui.inspect")
 
     def state(self) -> dict:
         """{document, dirty, documents, tool, selection, dialog, busy, revision} as the person sees them now."""
@@ -611,7 +624,7 @@ def main(argv):
         return 0
     app, cmd, args = argv[0], (argv[1] if len(argv) > 1 else "status"), argv[2:]
     c = Craft(app, port=_flag(args, "--port", None, int))
-    if cmd == "status":
+    if cmd in ("status", "ping"):
         pr({"app": c.m["name"], "port": c._resolve_port(), **c.state()})
     elif cmd == "launch":
         iso, roots = _pop(args, "--isolated"), []
@@ -652,12 +665,18 @@ def main(argv):
             pr(cat["tools"]) if cat["tools"] else print(f"{c.m['name']} has no tool list; see its APP.md")
     elif cmd == "tree":
         c.adapter.tree(c, _flag(args, "--depth", 99, int))
+    elif cmd == "node":
+        pr(c.node(int(args[0])))
+    elif cmd == "activate":
+        pr(c.activate(int(args[0])))
     elif cmd == "open":
         pr(c.open(args[0]))
     elif cmd in ("save", "export"):
         pr(getattr(c, cmd)(args[0], **_json_arg(args, 1)))
     elif cmd == "render":
-        kw = {k: v for k, v in (("scale", _flag(args, "--scale", None, float)), ("page", _flag(args, "--page", None, int))) if v is not None}
+        page = _flag(args, "--page", None, int)
+        page = _flag(args, "--artboard", page, int)
+        kw = {k: v for k, v in (("scale", _flag(args, "--scale", None, float)), ("page", page)) if v is not None}
         pr(c.render(args[0], **kw))
     elif cmd == "shot":
         pr(c.shot(args[0]))

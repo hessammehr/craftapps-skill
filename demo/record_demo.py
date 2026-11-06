@@ -270,7 +270,7 @@ def cmd_compose(a):
             notes = [e for e in evs if e["t"] <= t and e["type"] in ("note", "tool")]
             calls = [e for e in evs if e["t"] <= t and e["type"] == "call" and e.get("command")]
             cap = notes[-1]["text"] if notes else "…"
-            sub = f"vc ▸ {calls[-1]['command']}" if calls else ""
+            sub = f"▸ {calls[-1]['command']}" if calls else ""
             emit(overlay(crop(Image.open(p).convert("RGB"), a.crop), cap, sub, f"×{a.speed:g} speed"), dur)
         res = [e for e in evs if e["type"] == "result" and Path(e.get("path", "")).exists()]
         if res:

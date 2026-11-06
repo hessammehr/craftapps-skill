@@ -22,7 +22,7 @@ def history_len(c):
 
 
 def open(c, path):  # noqa: A001
-    return c.run("file.open_design", {"path": path}) if False else c.call("ui.file", {"path": path})
+    return c.call("ui.file", {"path": path})  # a background open: poll status until not busy
 
 
 def save(c, path, **kw):
@@ -35,6 +35,10 @@ def export(c, path, **kw):
 
 def render(c, path, scale=None, page=None):
     return c.call("ui.render", {"path": path})
+
+
+def activate(c, index):
+    return c.call("ui.documents", {"action": "switch", "index": index})
 
 
 def tree(c, max_depth=99):

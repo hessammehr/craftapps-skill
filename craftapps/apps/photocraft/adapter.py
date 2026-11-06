@@ -46,6 +46,10 @@ def render(c, path, scale=None, page=None):
     return c.call("app.save", {"path": path})
 
 
+def activate(c, index):
+    return c.run("document.activate", {"document": index})
+
+
 def tree(c, max_depth=99):
     d = c.call("ui.inspect").get("document") or {}
     if not d:

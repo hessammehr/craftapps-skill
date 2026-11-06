@@ -1,4 +1,4 @@
-# Control protocol (summary; full text in upstream/control-protocol.md and upstream/mcp.md)
+# Control protocol (summary; `craft.py vectorcraft docs` fetches the full text)
 
 Transport: TCP `127.0.0.1:<port>` (`--control <port>` at launch; here 12345). One JSON object per line:
 `{"id": 1, "method": "...", "params": {...}}` → `{"id": 1, "ok": true, "result": ...}` or `{"ok": false, "error": "..."}`.
