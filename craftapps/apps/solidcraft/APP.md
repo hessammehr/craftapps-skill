@@ -46,7 +46,8 @@ c.render("part.png"); c.save("part.sc"); c.export("part.step")             # als
 ```
 
 Assemblies: `component.create {name}` (it becomes active: new sketches and features go in it; `component.activate` to switch), `file.insert_step {path}` (STEP, IGES,
-FCStd, 3dm: a new component), `component.insert_design`, then `joint.create {type, a, b}` with origins such as `{"occurrence": "Lid:1", "circle": [x, y, z]}`. `joint.list` reports
+FCStd, 3dm: a new component), `file.insert_mesh` (STL, OBJ, 3MF), `component.insert_design` (a linked `.sc`: all its solid bodies, placed as in that design;
+`occurrence.copy` places another, starting where its source is, and `occurrence.move {matrix, space}` moves by a rigid matrix), then `joint.create {type, a, b}` with origins such as `{"occurrence": "Lid:1", "circle": [x, y, z]}`. `joint.list` reports
 conflicts and degrees of freedom; `joint.solve`, `joint.drive`, `motion.study` move and study them.
 
 ## Driving the GUI
@@ -99,10 +100,44 @@ solidcraft-cli commands                                         # the catalogue,
 
 All tested. `run --in design.sc` applies a script to an existing design, which suits batch variants. `script` turns a design's history back into a script, except for designs with components, which it doesn't support yet.
 
+**Step by step, for batch work:** `run` stops the whole script at the first failure. To check each step and react (retry another way, fall back to
+an import), drive `solidcraft-cli mcp --headless --allow-any-path` instead: an MCP server on stdio whose `execute` tool runs one command and replies,
+with `batch`, `measure`, `inspect_design`, `undo`, `open`, `save`, `export` and `new_design` alongside. `apps/solidcraft/headless.py` wraps it, with a
+time limit on every call:
+
+```python
+sys.path.insert(0, "<skill>/apps/solidcraft"); from headless import Session, Hang
+with Session(timeout=60) as s:
+    r = s.run("solid.fillet", edges=[[40, 30, 4]], radius="4 mm")   # the reply, or {"error": …}
+    bodies = s.tool("inspect_design")["bodies"]                      # name, volume_mm3, closed, bbox, faces of each body
+```
+
+A call over the limit kills that session and raises `Hang`: start a new `Session` and carry on from the last saved design. Run sessions one at a time;
+each holds a whole kernel.
+
 ## Teaching fundamentals
 
 Workspaces and tabs along the top (Model, Surface, Assemble, Insert, Inspect, Manage, View, Sheet Metal, Weldments); Browser on the left; History bar at the bottom. Sketch on a plane,
 constrain and dimension until it's fully defined, finish, then make a feature from its profile. Double-click a History item to edit it. Press S for command search. `craft.py solidcraft how WORDS` gives the ribbon location and shortcut of anything.
+
+## Checking what you built or imported
+
+Measure after anything you didn't draw yourself, and compare with the source (`inspect_design`, or `document.inspect {measure: true}` live): each body
+has `volume_mm3` and `closed`. In version 0.30.1 these needed it:
+
+- **STEP from Open CASCADE** (FreeCAD and others): toroidal fillet faces can arrive as an open body, with `closed: false` and no volume. The reply of
+  `file.insert_step` has no warning; the timeline does. Exporting the shape as NURBS first (FreeCAD: `shape.toNurbs().exportStep(…)`) imported cleanly.
+  `surface.stitch` closed such a body but with the wrong volume. Helical B-spline solids (threads, springs) came in as closed with absurd volumes
+  (−8e24 mm³); import those as a mesh.
+- **Body names** of a STEP import come from its header ("Open CASCADE STEP translator 7.8 1"): pass `name`, or rename after.
+- **Linked designs:** `component.insert_design` refuses a design holding only meshes ("no solid bodies to link"; insert the mesh instead), and once
+  linked a body measured 34.8 mm³ that was 50.3 mm³ in its own design. Compare the linked bodies' volumes with the source.
+- **Mesh bodies** can be moved, measured and exported, not used in booleans or features. `save` refused a design holding a 6.9M-triangle mesh
+  ("design container: mesh too large"); 4M saved.
+- **Kernel refusals and hangs:** some booleans (solids that only touch), fillets ("only straight edges can be blended", "the edge is smooth"), extrudes and
+  holes failed or never answered where FreeCAD succeeded. Headless, give each call a time limit (above); live, `ui.inspect` shows `busy`.
+
+These change from release to release: test before working around them, and drop a workaround once it is no longer needed.
 
 ## Pitfalls
 
@@ -113,4 +148,8 @@ constrain and dimension until it's fully defined, finish, then make a feature fr
 - **Killing the app** leaves an unclean-exit report and a notice at next start. Quit with `app.quit`, and only apps you started.
 - **`app.quit {force: true}` with unsaved changes leaves a recovery entry,** which prompts at the next start. Save first, or clear your own with `doc.recovery_list` and `doc.recovery_discard {id}`.
 - **`--isolated`** still writes token, session and recovery files to the real SolidCraft folder.
+- **`save` over an existing file** leaves the previous version beside it as `.sc.bak`. Delete your own in batch work; they add up.
+- **`file.export_stl {quality}`** sets the chord relative to each body's size (`standard` is coarse on large parts: 0.17 mm on an 848 mm body);
+  use `fine` or `finest` for measuring, and `bodies` to export only some.
+- **`edit.checkpoint`** takes no name; keep the id it returns. Only the last 16 are kept.
 - **Units:** a bare number is in the design's units (mm by default), and in millimetres for world points. Say `"2 in"` when you mean it.
