@@ -61,7 +61,7 @@ def tree(c, max_depth=99):
         for it in sp.get("items", []) if max_depth > 0 else []:
             print("  ", {k: it[k] for k in it if k in ("id", "kind", "content", "name", "rect", "bounds", "story", "fill", "stroke", "layer")})
     for st in d.get("stories", []) if max_depth > 0 else []:
-        t = str(st.get("text", ""))
+        t = str(st.get("preview", st.get("text", "")))  # DesignCraft 0.18 sends `preview`
         print(f"story #{st.get('id')}: {t[:70]!r} overset={st.get('overset')}")
 
 
