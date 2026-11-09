@@ -132,8 +132,9 @@ has `volume_mm3` and `closed`. In version 0.30.1 these needed it:
 - **Body names** of a STEP import come from its header ("Open CASCADE STEP translator 7.8 1"): pass `name`, or rename after.
 - **Linked designs:** `component.insert_design` refuses a design holding only meshes ("no solid bodies to link"; insert the mesh instead), and once
   linked a body measured 34.8 mm³ that was 50.3 mm³ in its own design. Compare the linked bodies' volumes with the source.
-- **Mesh bodies** can be moved, measured and exported, not used in booleans or features. `save` refused a design holding a 6.9M-triangle mesh
-  ("design container: mesh too large"); 4M saved.
+- **Mesh bodies** can be moved, measured and exported, not used in booleans or features. `mesh.convert {body}` rebuilds a closed mesh of constant
+  section (prisms, cylinders) as a solid with planar and cylindrical faces, which can: an STL cylinder came back closed, within 0.02% of its volume.
+  `save` refused a design holding a 6.9M-triangle mesh ("design container: mesh too large"); 4M saved.
 - **Kernel refusals and hangs:** some booleans (solids that only touch), fillets ("only straight edges can be blended", "the edge is smooth"), extrudes and
   holes failed or never answered where FreeCAD succeeded. Headless, give each call a time limit (above); live, `ui.inspect` shows `busy`.
 
