@@ -5,7 +5,7 @@ writes `.designcraft`, IDML, PDF (including PDF/X) and EPUB. Use InDesign's voca
 
 - **Port:** only with `--control`, so `craft.py designcraft launch`; no token. If it's running without a port, it has to be saved, quit and relaunched: ask.
 - **Grouping:** steps one by one, one undo entry each. `script.run {text}` takes a JSON array of `{command, params}` (or `command.id {json}` lines) with `$N.path` references, and refuses the whole script before running if a command or parameter is wrong.
-- **Surface:** `craft.py designcraft families`. Sweep: 734 commands, 501 run or refuse with a stated reason on a scratch page, 233 skipped for outside effects, none hung.
+- **Surface:** `craft.py designcraft families`. Sweep of 0.18.0: 745 commands, 505 run or refuse with a stated reason on a scratch page, 240 skipped for outside effects, none hung.
 - **Upstream agent guide:** `craft.py designcraft docs` fetches `agents.md`, worth reading for data merge, books and alternates.
 
 ## How a document works

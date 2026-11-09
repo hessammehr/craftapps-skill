@@ -60,5 +60,5 @@ Only for documents you made or opened yourself, and only when nothing in them ne
 ## Headless alternative
 
 `vectorcraft-cli` (separate download on macOS) offers `mcp` (an MCP server that proxies to the running app
-or runs headless), `run --in x --export y`, `convert in.svg out.pdf`. Not installed here: the raw port
-covers everything.
+or runs headless), `run --in x --export y`, `convert in.svg out.pdf`. See "Headless" in APP.md for tested
+uses; the raw port covers everything a live app can do.

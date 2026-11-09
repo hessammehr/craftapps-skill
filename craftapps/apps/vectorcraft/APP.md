@@ -7,7 +7,35 @@ DXF and `.vectorcraft`. Use Illustrator's vocabulary with the person. Read `SKIL
 - **Grouping:** `command.batch` is atomic and one undo step; `edit.undoGroup.begin/end` groups anything, with Python logic between.
 - **More here:** `recipes.md` (tested snippets), `manual-howto.md` (task → tool/menu for teaching), `protocol.md` (methods),
   `tools.py` (TikZ arrows, SVG units). Worked reasoning: the workflows below.
-- **Surface:** `craft.py vectorcraft families`. Sweep: 1,337 commands, 902 run or refuse with a stated reason on a scratch document, 435 skipped for outside effects, none hung.
+- **Surface:** `craft.py vectorcraft families`. Sweep of 0.22.0: 1,352 commands, 846 run or refuse with a stated reason on a scratch document, 506 skipped for outside effects, none hung. `vectorcraft-cli commands` lists 933: it has no window, so no UI or dialog commands.
+
+## Whole-task recipe (tested)
+
+A labelled two-box scheme for one journal column: shapes with their own paint, an arrowhead, Arial labels, a named group, then a look and the exports.
+
+```python
+c = Craft("vectorcraft")
+d = c.run("file.new", {"title": "Fig 1", "width": 241, "height": 100, "units": "Points"})   # one journal column
+c.run("document.activate", {"index": d["index"]})
+c.seq([
+    ("shape.rectangle", {"x": 12, "y": 40, "width": 80, "height": 50, "radius": 4}),
+    ("paint.setFill", {"color": "#dbe8f6"}), ("paint.setStroke", {"color": "#1f4e79"}), ("stroke.set", {"weight": 1}),
+    ("shape.rectangle", {"x": 149, "y": 40, "width": 80, "height": 50, "radius": 4}),
+    ("paint.setFill", {"color": "#fde9d9"}), ("paint.setStroke", {"color": "#9c3d10"}), ("stroke.set", {"weight": 1}),
+    ("shape.line", {"x1": 96, "y1": 65, "x2": 145, "y2": 65}),
+    ("paint.setStroke", {"color": "#000000"}), ("stroke.set", {"weight": 1, "endArrow": "Triangle", "arrowAlign": "tip"}),
+    ("text.create", {"x": 52, "y": 68.2, "text": "Reactant", "size": 9, "font": "Arial", "justify": "center", "color": "#000000"}),
+    ("text.create", {"x": 189, "y": 68.2, "text": "Product", "size": 9, "font": "Arial", "justify": "center", "color": "#000000"}),
+    ("text.create", {"x": 120.5, "y": 59, "text": "heat", "size": 8, "font": "Arial", "style": "Italic", "justify": "center", "color": "#000000"}),
+    ("select.all", {}), ("object.group", {}), ("object.setProps", {"name": "scheme"}),
+    ("text.create", {"x": 4, "y": 14, "text": "a", "size": 12, "font": "Arial", "style": "Bold", "color": "#000000"}),
+], label="Fig 1")
+c.render("/abs/fig1.png", scale=3)                 # look at it before exporting
+c.save("/abs/fig1.vectorcraft"); c.export("/abs/fig1.pdf"); c.export("/abs/fig1.svg")
+# then: uv run <skill>/apps/vectorcraft/tools.py svgunits /abs/fig1.svg mm   (85.0 × 35.3 mm)
+```
+
+Labels sit 3.2 pt below the box centre (fact 5: baseline, Arial cap height). The arrow stops 4 pt short of each box.
 
 ## The model in five facts
 
@@ -105,6 +133,24 @@ When a target revision exists (or the user describes one):
   document that path, so later saves go there.
 - Saving in the original's format over the original only when the user asks. A VectorCraft-written SVG loses
   Inkscape-only metadata (`inkscape:` layers become plain groups, export hints go).
+
+## Headless
+
+`vectorcraft-cli` is a separate download on macOS: `vectorcraft-cli-<version>-macos-universal.zip` from the GitHub releases of
+storytold/vectorcraft. Use the release that matches the app. Each command below starts its own engine and never touches a running app:
+
+```bash
+vectorcraft-cli convert fig1.pdf fig1.png --ppi 216                  # any readable format → the extension's format
+vectorcraft-cli convert fig1.vectorcraft fig1.svg --outline-text     # no fonts needed to view it
+vectorcraft-cli run --in fig1.vectorcraft --cmd document.find --params '{"text": "heat"}' \
+    --cmd text.setText --params '{"id": "$0.matches.0.id", "text": "light"}' --export fig1-light.pdf   # "$N" = step N's result
+vectorcraft-cli commands                                             # the catalogue as JSON (933 in 0.22.0: no UI commands)
+vectorcraft-cli mcp --headless --automation-read-root DIR --automation-write-root DIR   # MCP on stdio: tool command_run {id, params}
+```
+
+All tested on 0.22.0. `run` prints one JSON result per step and takes `--commands steps.json` for longer scripts. **Plain `mcp` connects to a running
+VectorCraft** (127.0.0.1:7979) when there is one. Pass `--headless`, or the roots, which imply it, to keep off the person's app. With roots, any read or
+write outside them is refused ("automation path rejected").
 
 ## Typeset math and TikZ-style arrows
 

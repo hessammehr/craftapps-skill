@@ -7,7 +7,7 @@ Photoshop's vocabulary with the person. Read `SKILL.md` first; this file is what
 - **Auth:** a token file, created by `launch` and read by `craft.py`. A running instance's token path is taken from its command line.
 - **File access:** channel paths must be under the folders given at launch (home by default, `--roots DIR` to narrow). Relative paths are relative to that root.
 - **Grouping:** none in the GUI: each command is one history state. `c.seq` undoes its own steps on failure. `history.newSnapshot` marks a point; `history.selectState` jumps back.
-- **Surface:** `craft.py photocraft families`. Sweep: 965 commands, 788 run or refuse with a stated reason on a scratch image, 177 skipped for outside effects, none hung.
+- **Surface:** `craft.py photocraft families`. Sweep of 0.21.0: 993 commands, 794 run or refuse with a stated reason on a scratch image, 199 skipped for outside effects, none hung.
 
 ## How a document works
 
