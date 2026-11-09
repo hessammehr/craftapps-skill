@@ -122,13 +122,15 @@ constrain and dimension until it's fully defined, finish, then make a feature fr
 
 ## Checking what you built or imported
 
-Measure after anything you didn't draw yourself, and compare with the source (`inspect_design`, or `document.inspect {measure: true}` live): each body
-has `volume_mm3` and `closed`. In version 0.30.1 these needed it:
+Measure after anything you didn't draw yourself, and compare with the source: each body has `volume_mm3` and `closed`. `inspect.measure` (a command,
+so the same headless and live) gives every body in world placement, those in placed components included; `inspect_design` lists only the design's
+own bodies, so it misses an assembly's parts. `joint.list` gives the joints and any conflicts. To check a saved design rather than its cached result,
+run `timeline.compute_all` after opening it. In version 0.30.1 these needed checking:
 
 - **STEP from Open CASCADE** (FreeCAD and others): toroidal fillet faces can arrive as an open body, with `closed: false` and no volume. The reply of
   `file.insert_step` has no warning; the timeline does. Exporting the shape as NURBS first (FreeCAD: `shape.toNurbs().exportStep(…)`) imported cleanly.
-  `surface.stitch` closed such a body but with the wrong volume. Helical B-spline solids (threads, springs) came in as closed with absurd volumes
-  (−8e24 mm³); import those as a mesh.
+  `surface.stitch` closed such a body but with the wrong volume. Helical B-spline solids (threads, springs) came in as closed, with absurd volumes
+  (−8e24 mm³) or plausible wrong ones (a thread at 1,863 mm³ instead of 3,202); import those as a mesh.
 - **Body names** of a STEP import come from its header ("Open CASCADE STEP translator 7.8 1"): pass `name`, or rename after.
 - **Linked designs:** `component.insert_design` refuses a design holding only meshes ("no solid bodies to link"; insert the mesh instead), and once
   linked a body measured 34.8 mm³ that was 50.3 mm³ in its own design. Compare the linked bodies' volumes with the source.
@@ -136,7 +138,9 @@ has `volume_mm3` and `closed`. In version 0.30.1 these needed it:
   section (prisms, cylinders) as a solid with planar and cylindrical faces, which can: an STL cylinder came back closed, within 0.02% of its volume.
   `save` refused a design holding a 6.9M-triangle mesh ("design container: mesh too large"); 4M saved.
 - **Kernel refusals and hangs:** some booleans (solids that only touch), fillets ("only straight edges can be blended", "the edge is smooth"), extrudes and
-  holes failed or never answered where FreeCAD succeeded. Headless, give each call a time limit (above); live, `ui.inspect` shows `busy`.
+  holes failed or never answered where FreeCAD succeeded. Headless, give each call a time limit (above); live, `ui.inspect` shows `busy`. Whether a
+  call hangs can depend on the session: a fillet and a hole that hung late in a long session failed with an error within 25 s in a fresh one, while an
+  extrude and a combine hung in both. A call that hung may be worth one retry in a new session.
 
 These change from release to release: test before working around them, and drop a workaround once it is no longer needed.
 
